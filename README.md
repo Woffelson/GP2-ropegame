@@ -1,2 +1,2 @@
 # GP2-ropegame
-Will this blend? That is the question.
+Does this even work? That is the question.
