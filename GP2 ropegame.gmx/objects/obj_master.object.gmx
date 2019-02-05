@@ -159,7 +159,6 @@ if object_exists(obj_player)
           <argument>
             <kind>1</kind>
             <string>///TEXT
-
 var klik = obj_player.key_start;
 if (characters &lt; message_length)
 { //if current character count is less than the amount in current message* 
@@ -167,20 +166,22 @@ if (characters &lt; message_length)
     if //string_width_ext(message_draw,line,hlimit) &lt; hlimit || //unnecessary?
         string_height_ext(message_draw,line,hlimit) &lt; vlimit
     {
-    characters += increase * (1 + hold); //increase speed based on hold
+    characters += increase * (1 + hold*2); //increase speed based on hold
     message_draw = string_copy(message[message_current],cp,characters); //copy string to current character
     }
     else if keyboard_check_pressed(klik)
     {
-        cp = characters;
-        message_draw = "";
+        message_length -= characters; //shorten text with the already written part
+        cp += characters; //set text position to start at the text written so far
+        characters = 0; //start writing the new part from beginning
+        message_draw = ""; //clear text
     }
 } 
 else 
 { //if current character is more than the amount in the current message
     cp = 0;
     if (keyboard_check_pressed(klik)) 
-    { //if we press Z...
+    {
         if (message_current &lt; messend) 
         { //if there are more messages left to show
             message_current += 1; //increase the message by 1
@@ -190,7 +191,6 @@ else
         }
         else 
         { //if our messages are done (we reach end)...
-            //instance_destroy(); //destroy the object, no no pls NO!
             message_current = 0;
             message_draw = "";
         }
