@@ -185,7 +185,7 @@ draw_sprite(sprite2,image_index,round(x),round(y));
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>16,24</point>
-    <point>8,16</point>
+    <point>16,16</point>
+    <point>16,16</point>
   </PhysicsShapePoints>
 </object>

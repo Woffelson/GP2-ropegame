@@ -63,5 +63,5 @@ if instance_exists(rope)
 if instance_exists(rope)
 {
     if rope.phy_speed = 0 && rope.grab = false 
-    physics_apply_local_force(0,0,(rope.x-x)/f,((rope.y + ropelength)-y)/(f/2));
+    scr_ropeforce(rope,self);
 }

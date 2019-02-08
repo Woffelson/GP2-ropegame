@@ -58,7 +58,7 @@ if point_in_rectangle(x,y,sub.x1,sub.y1,sub.x2,sub.y2) //checks current subroom
 {
     phy_active = global.action;
     if g != noone &amp;&amp; instance_exists(r) //if player and rope are set
-        physics_apply_force(x,y,(g.x-x)/f,((g.y + g.ropelength)-y)/(f/2)); //soon menoa ny!
+        scr_ropeforce(g,g); //soon menoa ny!
     else {g = noone; r = noone;}
 }
 else phy_active = false; //if outside current subroom, no physics calculation

@@ -30,6 +30,7 @@ viewfollow = noone;
 subroom = noone;
 transitiontimer = 0;
 subroomprev = noone;
+pause = 0;
 
 scr_controls0();
 </string>
@@ -98,9 +99,15 @@ message_length = string_length(message[message_current]); //get the number of ch
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if message_current != 0 || transitiontimer &gt; 0 || keyboard_check_pressed(key_start)
+            <string>if message_current != 0 || transitiontimer &gt; 0 || pause = 1
     global.action = 0;
 else global.action = 1; //these codes (should) guarantee game pauses when texting
+if keyboard_check_pressed(key_start)
+{
+    if pause = 1
+        pause = 0;
+    else pause = 1;
+}
 </string>
           </argument>
         </arguments>
