@@ -258,6 +258,7 @@ draw_text_ext(view_xview[0]+64,view_yview[0],message_draw,-1,hlimit);
 //debug:
 draw_text(view_xview[0],view_yview[0],characters);
 draw_text(view_xview[0],view_yview[0]+16,message_length);
+draw_text(view_xview[0],view_yview[0]+32,global.action);
 </string>
           </argument>
         </arguments>
