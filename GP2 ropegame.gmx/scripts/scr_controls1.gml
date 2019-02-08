@@ -23,10 +23,13 @@ if keyboard_check_pressed(argument4) //this gives the first nudge to air
         with (rope) instance_destroy();
         rope = noone;
     }*/
-if ((physics_test_overlap(xx+2,yy+4,phy_rotation,obj_block) //ground checking both sides
+inst = instance_place(xx,yy,obj_block); //checks collision with blocks
+if inst != noone
+if (inst.phy_speed_y = 0 && //you cannot jump on flying blocks
+    ((physics_test_overlap(xx+2,yy+4,phy_rotation,obj_block) //ground checking both sides
     && physics_test_overlap(xx-2,yy+4,phy_rotation,obj_block)) //walljump:
     || (keyboard_check(argument0) && physics_test_overlap(xx+4,yy,phy_rotation,obj_block)) 
-    || (keyboard_check(argument1) && physics_test_overlap(xx-4,yy,phy_rotation,obj_block)))
+    || (keyboard_check(argument1) && physics_test_overlap(xx-4,yy,phy_rotation,obj_block))))
 {
     phy_speed_y = 0; 
     physics_apply_local_impulse(0,0,0,-jumpspeed);

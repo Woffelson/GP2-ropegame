@@ -11,12 +11,14 @@
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_dlock</sprite>
     <sprite>sprites\spr_box</sprite>
+    <sprite>sprites\spr_text</sprite>
     <sprite>sprites\spr_rope</sprite>
     <sprite>sprites\spr_subroom</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
+    <script>scripts\scr_controls0.gml</script>
     <script>scripts\scr_controls1.gml</script>
     <script>scripts\view_center_on.gml</script>
   </scripts>
@@ -33,6 +35,7 @@
     <object>objects\obj_box</object>
     <object>objects\obj_rope</object>
     <object>objects\obj_subroom</object>
+    <object>objects\obj_text</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\test</room>

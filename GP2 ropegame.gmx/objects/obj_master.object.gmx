@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>-999</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -30,6 +30,8 @@ viewfollow = noone;
 subroom = noone;
 transitiontimer = 0;
 subroomprev = noone;
+
+scr_controls0();
 </string>
           </argument>
         </arguments>
@@ -56,10 +58,11 @@ subroomprev = noone;
 
 //write your messages in an array, starting at 0, like so
 message[0] = "";
-message[1] = "This shit doesn't probably even work!!"
-message[2] = "Yeeaahh whazzuup muh homies?!? gggg ggggg jjjj fffff fffff gggggggggg ffff fffffff fff f ff";
-message[3] = "Whaatt?? Fuk off from muh hoods dawg!!1!";
-messend = 3; //is the last number in our array
+message[1] = "You should be able to read this text only once in a lifetime! Make sure you read this carefully or... or bad stuff happens and haunts you for the rest of your miserable life."
+message[2] = "This shit doesn't probably even work!!"
+message[3] = "Yeeaahh whazzuup muh homies?!? Gggg Ggggg Jjjj Fffff Fffff Gggggggggg Ffff Fffffff Fff F Ff";
+message[4] = "Whaatt?? Fuk off from muh hoods dawg!!1!";
+messend = 4; //is the last number in our array
 
 message_current = 0; //0 is the first number in our array, and the message we are currently at
 message_draw = ""; //this is what we 'write' out. It's blank right now
@@ -95,6 +98,29 @@ message_length = string_length(message[message_current]); //get the number of ch
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>if message_current != 0 || transitiontimer &gt; 0 || keyboard_check_pressed(key_start)
+    global.action = 0;
+else global.action = 1; //these codes (should) guarantee game pauses when texting
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// VIEW
 if (instance_exists(viewfollow)) 
 {
@@ -112,8 +138,7 @@ if (instance_exists(viewfollow))
     }
     if (transitiontimer &gt; 0) 
     {
-        transitiontimer += 0.05;
-        global.action = 0;
+        transitiontimer += 0.025;
         var x1, x2, y1, y2;
         x1 = clamp(viewfollow.x - view_wview[0]/2,subroomprev.x1,subroomprev.x2 - view_wview);
         y1 = clamp(viewfollow.y - view_hview[0]/2,subroomprev.y1,subroomprev.y2 - view_hview);
@@ -127,7 +152,6 @@ if (instance_exists(viewfollow))
         {
             subroomprev = subroom;
             transitiontimer = 0;
-            global.action = 1;
         }
     }
 }
@@ -159,12 +183,12 @@ if object_exists(obj_player)
           <argument>
             <kind>1</kind>
             <string>///TEXT
-var klik = obj_player.key_start;
+var klik = key_A;
 if (characters &lt; message_length)
 { //if current character count is less than the amount in current message* 
     hold = keyboard_check(klik); //hold is true or false if we hold klik or not
-    if //string_width_ext(message_draw,line,hlimit) &lt; hlimit || //unnecessary?
-        string_height_ext(message_draw,line,hlimit) &lt; vlimit
+    if //string_width_ext(message_draw,line,hlimit) &lt; hlimit &amp;&amp; //unnecessary?
+        string_height_ext(message_draw,-1,hlimit-4) &lt; vlimit
     {
     characters += increase * (1 + hold*2); //increase speed based on hold
     message_draw = string_copy(message[message_current],cp,characters); //copy string to current character
@@ -180,7 +204,7 @@ if (characters &lt; message_length)
 else 
 { //if current character is more than the amount in the current message
     cp = 0;
-    if (keyboard_check_pressed(klik)) 
+    if (keyboard_check_pressed(klik) &amp;&amp; message_current &gt; 0) 
     {
         if (message_current &lt; messend) 
         { //if there are more messages left to show
@@ -223,7 +247,7 @@ draw_set_colour(c_black);
 draw_rectangle(view_xview[0]+64,view_yview[0],view_xview[0]+64+hlimit,view_yview[0]+vlimit,0);
 draw_set_colour(c_lime);
 draw_set_font(font0);
-draw_text_ext(view_xview[0]+64,view_yview[0],message_draw,line,hlimit);
+draw_text_ext(view_xview[0]+64,view_yview[0],message_draw,-1,hlimit);
 //debug:
 draw_text(view_xview[0],view_yview[0],characters);
 draw_text(view_xview[0],view_yview[0]+16,message_length);
