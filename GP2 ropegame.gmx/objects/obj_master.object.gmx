@@ -249,16 +249,21 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///TEXT
+            <string>if view_current = 1 //makes sure things are being drawn exclusively on status bar view
+{
+///TEXT
+draw_set_colour(c_dkgray);
+draw_rectangle(view_xview[1],view_yview[1],view_wview[1],view_hview[1],0)
 draw_set_colour(c_black);
-draw_rectangle(view_xview[0]+64,view_yview[0],view_xview[0]+64+hlimit,view_yview[0]+vlimit,0);
+draw_rectangle(view_xview[1]+64,view_yview[1],view_xview[1]+64+hlimit,view_yview[1]+vlimit,0);
 draw_set_colour(c_lime);
 draw_set_font(font0);
-draw_text_ext(view_xview[0]+64,view_yview[0],message_draw,-1,hlimit);
+draw_text_ext(view_xview[1]+64,view_yview[1],message_draw,-1,hlimit);
 //debug:
-draw_text(view_xview[0],view_yview[0],characters);
-draw_text(view_xview[0],view_yview[0]+16,message_length);
-draw_text(view_xview[0],view_yview[0]+32,global.action);
+draw_text(view_xview[1],view_yview[1],characters);
+draw_text(view_xview[1],view_yview[1]+16,message_length);
+draw_text(view_xview[1],view_yview[1]+32,global.action);
+}
 </string>
           </argument>
         </arguments>

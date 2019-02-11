@@ -2,18 +2,25 @@
 
 //sideways moves
 horizontal = keyboard_check(argument1) - keyboard_check(argument0);
-//horizontal = gamepad_axis_value(0,gp_axislh) //gamepad example
+//horizontal = spede*gamepad_axis_value(0,gp_axislh) //gamepad example
 if horizontal != 0 //if some moving is pressed either left or right
 {
+    if sign(horizontal) != xscale direction = 180-direction;
     xscale = sign(horizontal);
-    moves = 1;
 }
-else moves = 0;
 
 //aim
-direction = point_direction(xx,yy,mouse_x,mouse_y); //replace this with key version:
-if keyboard_check(argument2) || keyboard_check(argument3)
-    x=x; //work-in-progress
+//direction = point_direction(xx,yy,mouse_x,mouse_y); //replace this with key version:
+d = (keyboard_check(argument2) - keyboard_check(argument3))*2;
+if d != 0 //if pressed either up or down
+{
+    if xscale = -1
+        direction = clamp(direction-d,90,270);
+    else if direction <= 90
+        direction = clamp(direction+d,-90,90);
+    else if direction >= 270
+        direction = clamp(direction+d,270,450);
+}
 
 //jump
 if keyboard_check_pressed(argument4) //this gives the first nudge to air
@@ -35,8 +42,10 @@ if (inst.phy_speed_y = 0 && //you cannot jump on flying blocks
     physics_apply_local_impulse(0,0,0,-jumpspeed);
 }
 }
-if keyboard_check(argument4) && phy_speed_y < 0//holding the key jumps up higher/longer
+if keyboard_check(argument4) && phy_speed_y < 0//holding the key jumps up higher/longer 
     physics_apply_local_force(0,0,0,-glide);
+jumping = keyboard_check(argument4);
+gump = keyboard_check(argument6); //dash/running
 
 //NINJA ROPE á la LIERO
 if (argument5 != mb_left && keyboard_check_pressed(argument5)) || 
