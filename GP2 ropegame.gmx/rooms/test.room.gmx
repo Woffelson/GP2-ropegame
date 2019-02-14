@@ -10,7 +10,8 @@
   <persistent>0</persistent>
   <colour>8404992</colour>
   <showcolour>-1</showcolour>
-  <code></code>
+  <code>//here we should add the text
+scr_alternate_text("This is a test", 0.5, 320, 0);</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

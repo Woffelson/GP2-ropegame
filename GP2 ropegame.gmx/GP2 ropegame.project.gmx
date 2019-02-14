@@ -20,6 +20,12 @@
     <sprite>sprites\spr_rope</sprite>
     <sprite>sprites\spr_aim</sprite>
     <sprite>sprites\spr_lad</sprite>
+    <sprites name="mobs">
+      <sprite>sprites\spr_wolfi</sprite>
+      <sprite>sprites\spr_beari</sprite>
+      <sprite>sprites\spr_bearw</sprite>
+      <sprite>sprites\spr_beara</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -28,6 +34,7 @@
     <script>scripts\scr_controls1.gml</script>
     <script>scripts\view_center_on.gml</script>
     <script>scripts\scr_ropeforce.gml</script>
+    <script>scripts\scr_alternate_text.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -45,6 +52,7 @@
     <object>objects\obj_subroom</object>
     <object>objects\obj_text</object>
     <object>objects\obj_lad</object>
+    <object>objects\obj_alternate_text</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room2</room>
