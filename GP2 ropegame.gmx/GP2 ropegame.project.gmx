@@ -23,6 +23,7 @@
     <script>scripts\scr_controls1.gml</script>
     <script>scripts\view_center_on.gml</script>
     <script>scripts\scr_ropeforce.gml</script>
+    <script>scripts\scr_alternate_text.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -38,6 +39,7 @@
     <object>objects\obj_rope</object>
     <object>objects\obj_subroom</object>
     <object>objects\obj_text</object>
+    <object>objects\obj_alternate_text</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\test</room>
