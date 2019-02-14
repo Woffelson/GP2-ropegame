@@ -3,7 +3,7 @@
   <spriteName>spr_rope</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-2</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -93,6 +93,29 @@ grab = true;
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_slock">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision happens
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_block">
       <action>
         <libid>1</libid>
@@ -140,7 +163,15 @@ grab = true;
             <kind>1</kind>
             <string>draw_self();
 if host != noone
-draw_line_width_colour(x,y,host.x,host.y,2,c_teal,c_teal);
+{
+//draw_line_width_colour(x,y,host.x,host.y,2,c_teal,c_teal);
+with(host)
+{
+    var rx = lengthdir_x(8,point_direction(xx,yy,other.x,other.y));
+    var ry = lengthdir_y(8,point_direction(xx,yy,other.x,other.y));
+    draw_line_width_colour(other.x,other.y,x+rx,y+ry,2,c_teal,c_teal);
+}
+}
 </string>
           </argument>
         </arguments>

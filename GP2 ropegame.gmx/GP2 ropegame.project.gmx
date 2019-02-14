@@ -7,14 +7,19 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sprite0</sprite>
+    <sprite>sprites\spr_arm</sprite>
     <sprite>sprites\sprite2</sprite>
-    <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_dlock</sprite>
-    <sprite>sprites\spr_box</sprite>
-    <sprite>sprites\spr_text</sprite>
+    <sprites name="invisible blocks">
+      <sprite>sprites\spr_block</sprite>
+      <sprite>sprites\spr_slock</sprite>
+      <sprite>sprites\spr_dlock</sprite>
+      <sprite>sprites\spr_box</sprite>
+      <sprite>sprites\spr_text</sprite>
+      <sprite>sprites\spr_subroom</sprite>
+    </sprites>
     <sprite>sprites\spr_rope</sprite>
-    <sprite>sprites\spr_subroom</sprite>
     <sprite>sprites\spr_aim</sprite>
+    <sprite>sprites\spr_lad</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -33,14 +38,18 @@
     <objects name="blocks">
       <object>objects\obj_dlock</object>
       <object>objects\obj_block</object>
+      <object>objects\obj_slock</object>
     </objects>
     <object>objects\obj_box</object>
     <object>objects\obj_rope</object>
     <object>objects\obj_subroom</object>
     <object>objects\obj_text</object>
+    <object>objects\obj_lad</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room2</room>
     <room>rooms\test</room>
+    <room>rooms\template</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
