@@ -21,13 +21,19 @@
     <sprite>sprites\spr_aim</sprite>
     <sprite>sprites\spr_lad</sprite>
     <sprites name="mobs">
-      <sprite>sprites\spr_wolfi</sprite>
       <sprite>sprites\spr_beari</sprite>
       <sprite>sprites\spr_bearw</sprite>
       <sprite>sprites\spr_beara</sprite>
+      <sprite>sprites\spr_wolfi</sprite>
+      <sprite>sprites\spr_wolfw</sprite>
+      <sprite>sprites\spr_wolfa</sprite>
     </sprites>
+    <sprite>sprites\spr_tree</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+    <background>background\background1</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_controls0.gml</script>
@@ -45,6 +51,7 @@
     <objects name="blocks">
       <object>objects\obj_dlock</object>
       <object>objects\obj_block</object>
+      <object>objects\obj_tree</object>
       <object>objects\obj_slock</object>
     </objects>
     <object>objects\obj_box</object>
@@ -53,6 +60,7 @@
     <object>objects\obj_text</object>
     <object>objects\obj_lad</object>
     <object>objects\obj_alternate_text</object>
+    <object>objects\obj_bear</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room2</room>

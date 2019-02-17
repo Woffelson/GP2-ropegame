@@ -32,6 +32,7 @@ start_write = 0; //checks whether text has been started
 mode = 0; //with modes 1&amp;3 could destroy itself after text is done (one time only!)
 startti = 0; //starts at stored message n (stored in obj_master create)
 endi = 0; //ends at stored message n (stored in obj_master create)
+happening = 0; //triggers additional extra, like unlocking stuff
 
 //so, mode 0: keytrg,eternal 1: keytrg,mortal 2: instatrg,eternal 3: instatrg,mortal
 </string>
@@ -56,7 +57,59 @@ endi = 0; //ends at stored message n (stored in obj_master create)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if active = 1 &amp;&amp; instance_exists(obj_master)
+            <string>///v2
+if active = 1 //&amp;&amp; instance_exists(obj_master)
+{
+    //if obj_master.message_current = 0 //this can be either sign of start or end...
+    {
+        if start_write = 0
+        {//start texting if obj_senpai still shy OwO
+            scr_alternate_text(startti, 0.5, 256, 0);
+            /*with (obj_master)
+            {
+                message_current = other.startti;
+                messend = other.endi;
+                message_length = string_length(message[message_current]);
+                characters = 0; //set the characters back to 0
+                message_draw = ""; //clear the drawn text
+            }*/
+            start_write = 1;
+            switch(happening)
+            {
+                case 1: global.unlock[0] = 1; //unlock rope
+                break;
+            }
+        }
+        else
+        {
+            if (mode = 0 || mode = 2) active = 0; //back to inactive, unless...
+            else instance_destroy();//as one time lore has been told, say no more and begone
+        }
+    }
+}
+else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
+    start_write = 0; //reset until we start texting again, bye! UwU
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/*if active = 1 &amp;&amp; instance_exists(obj_master)
 {
     if obj_master.message_current = 0 //this can be either sign of start or end...
     {
@@ -103,7 +156,7 @@ else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>/*draw_self();
 draw_text(x-8,y,startti);
 draw_text(x+32,y,endi);
 draw_text(x,y+16,active);

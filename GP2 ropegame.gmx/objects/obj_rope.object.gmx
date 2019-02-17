@@ -169,7 +169,7 @@ with(host)
 {
     var rx = lengthdir_x(8,point_direction(xx,yy,other.x,other.y));
     var ry = lengthdir_y(8,point_direction(xx,yy,other.x,other.y));
-    draw_line_width_colour(other.x,other.y,x+rx,y+ry,2,c_teal,c_teal);
+    draw_line_width_colour(other.x,other.y,x+rx,y+ry,2,c_fuchsia,c_fuchsia);
 }
 }
 </string>

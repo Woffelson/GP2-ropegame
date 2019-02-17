@@ -30,12 +30,18 @@ alpha = 0;
 print = "";
 time = 0;
 depth = obj_master.depth-1;//depth - instance_number(obj_text); //wtf?
+
+t[0] = "This is a test."
+t[1] = "The landing pod and my big guns are there, but I have to find another way..."
+t[2] = "Owie, my bones! Hmm, I could still wall jump back, in case I have to..."
+t[3] = "A note from a fallen comrade: 'aah, fuck you bear! Goodbye cruel world. Cancel my magazine subscriptions.'"
+t[4] = "...where are all the rifles? Only a f***ing rope. Guess, I'll stick with that. Sh*t."
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="8" enumb="0">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -59,10 +65,19 @@ if(time &lt; text_length){
     print = string_copy(text,0,time);
     
 }
+else
+{
+    if keyboard_check(obj_master.key_A)
+    {
+        instance_destroy();
+    }
+}
 </string>
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>

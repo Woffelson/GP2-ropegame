@@ -6,9 +6,9 @@
 txt = instance_create(argument2, argument3, obj_alternate_text);
 
 with (txt){
-    padding = 8;
-    maxlength = (view_xview[1]+view_wview[1])-(view_xview[1]+x);//view_wview[0];
-    text = argument0;
+    padding = 4;
+    maxlength = 188;//view_wview[0];
+    text = t[argument0]; //text = argument0;
     spd = argument1;
     font = font0;
     

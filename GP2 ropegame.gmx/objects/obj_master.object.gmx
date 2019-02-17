@@ -34,7 +34,7 @@ pause = 0;
 
 scr_controls0();
 
-global.unlock[0] = 1; //ninja rope
+global.unlock[0] = 0; //ninja rope
 </string>
           </argument>
         </arguments>
@@ -101,9 +101,11 @@ message_length = string_length(message[message_current]); //get the number of ch
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if message_current != 0 || transitiontimer &gt; 0 || pause = 1
+            <string>///PAUSE GAME SITUATIONS (important)
+if message_current != 0 || instance_exists(obj_alternate_text) //2 versions if text is on
+    || transitiontimer &gt; 0 || pause = 1 //checks if room transition or pause game is on
     global.action = 0;
-else global.action = 1; //these codes (should) guarantee game pauses when texting
+else global.action = 1;
 if keyboard_check_pressed(key_start)
 {
     if pause = 1
@@ -171,6 +173,8 @@ if object_exists(obj_rope)
     instance_activate_object(obj_rope);
 if object_exists(obj_player)
     instance_activate_object(obj_player);
+if object_exists(obj_alternate_text)
+    instance_activate_object(obj_alternate_text);
 </string>
           </argument>
         </arguments>
@@ -251,7 +255,8 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if view_current = 1 //makes sure things are being drawn exclusively on status bar view
+            <string>//window_set_cursor(cr_none);
+if view_current = 1 //makes sure things are being drawn exclusively on status bar view
 {
 ///TEXT
 draw_set_colour(c_dkgray);
@@ -262,14 +267,16 @@ draw_set_colour(c_lime);
 draw_set_font(font0);
 draw_text_ext(view_xview[1]+64,view_yview[1],message_draw,-1,hlimit);
 //debug:
-draw_text(view_xview[1],view_yview[1],characters);
-draw_text(view_xview[1],view_yview[1]+16,message_length);
-draw_text(view_xview[1],view_yview[1]+32,global.action);
+//draw_text(view_xview[1],view_yview[1],characters);
+//draw_text(view_xview[1],view_yview[1]+16,message_length);
+//draw_text(view_xview[1],view_yview[1]+32,global.action);
 }
 /*else
 {
     physics_world_draw_debug(phy_debug_render_shapes);
 }
+background_x[0] = (view_xview[0]);
+background_y[0] = (view_yview[0]);
 </string>
           </argument>
         </arguments>
