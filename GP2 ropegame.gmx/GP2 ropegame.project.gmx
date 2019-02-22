@@ -6,8 +6,13 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprite0</sprite>
-    <sprite>sprites\spr_arm</sprite>
+    <sprites name="player">
+      <sprite>sprites\sprite0</sprite>
+      <sprite>sprites\spr_arm</sprite>
+      <sprite>sprites\spr_walk</sprite>
+      <sprite>sprites\spr_rope</sprite>
+      <sprite>sprites\spr_aim</sprite>
+    </sprites>
     <sprite>sprites\sprite2</sprite>
     <sprites name="invisible blocks">
       <sprite>sprites\spr_block</sprite>
@@ -17,9 +22,6 @@
       <sprite>sprites\spr_text</sprite>
       <sprite>sprites\spr_subroom</sprite>
     </sprites>
-    <sprite>sprites\spr_rope</sprite>
-    <sprite>sprites\spr_aim</sprite>
-    <sprite>sprites\spr_lad</sprite>
     <sprites name="mobs">
       <sprite>sprites\spr_beari</sprite>
       <sprite>sprites\spr_bearw</sprite>
@@ -27,8 +29,16 @@
       <sprite>sprites\spr_wolfi</sprite>
       <sprite>sprites\spr_wolfw</sprite>
       <sprite>sprites\spr_wolfa</sprite>
+      <sprite>sprites\spr_sentry</sprite>
     </sprites>
-    <sprite>sprites\spr_tree</sprite>
+    <sprites name="landscape">
+      <sprite>sprites\spr_tree</sprite>
+      <sprite>sprites\spr_tree2</sprite>
+      <sprite>sprites\spr_spike</sprite>
+      <sprite>sprites\spr_lad</sprite>
+      <sprite>sprites\spr_crate1</sprite>
+      <sprite>sprites\spr_trap</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -52,6 +62,7 @@
       <object>objects\obj_dlock</object>
       <object>objects\obj_block</object>
       <object>objects\obj_tree</object>
+      <object>objects\obj_tree2</object>
       <object>objects\obj_slock</object>
     </objects>
     <object>objects\obj_box</object>
@@ -61,6 +72,8 @@
     <object>objects\obj_lad</object>
     <object>objects\obj_alternate_text</object>
     <object>objects\obj_bear</object>
+    <object>objects\obj_trap</object>
+    <object>objects\obj_spike</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room2</room>
