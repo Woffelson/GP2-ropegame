@@ -28,6 +28,7 @@
             <string>host = noone;
 grab = false;
 grabbed = noone;
+wid = room_speed;
 </string>
           </argument>
         </arguments>
@@ -60,6 +61,9 @@ if grabbed != noone
     phy_position_x = grabbed.phy_position_x;
     phy_position_y = grabbed.phy_position_y;
 }
+if wid &lt;= -room_speed wid = room_speed;
+else wid -= 2;
+part_particles_create(global.pt1,x,y,global.ptype1,choose(0,0,0,1));
 </string>
           </argument>
         </arguments>
@@ -169,7 +173,11 @@ with(host)
 {
     var rx = lengthdir_x(8,point_direction(xx,yy,other.x,other.y));
     var ry = lengthdir_y(8,point_direction(xx,yy,other.x,other.y));
-    draw_line_width_colour(other.x,other.y,x+rx,y+ry,2,c_fuchsia,c_fuchsia);
+    draw_set_alpha(0.75)//abs(other.wid/60)); //0.75
+    draw_line_width_colour(other.x,other.y,x+rx,y+ry,abs(other.wid/60)+1,c_fuchsia,c_fuchsia);
+    draw_set_alpha(abs(other.wid/60)/4); //0.25
+    draw_line_width_colour(other.x,other.y,x+rx,y+ry,choose(4,5,6),c_aqua,c_white);
+    draw_set_alpha(1);
 }
 }
 </string>

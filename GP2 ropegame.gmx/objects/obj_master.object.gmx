@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.action = 1;
+global.saves = 0;
 viewfollow = noone;
 subroom = noone;
 transitiontimer = 0;
@@ -34,7 +35,23 @@ pause = 0;
 
 scr_controls0();
 
-global.unlock[0] = 0; //ninja rope
+global.unlockables = 2; //counts unlockable variables in array (more info: set_variables)
+
+alarm[0] = 5; //slight delay to load file
+
+//particles, yeeaayy
+global.pt1 = part_system_create();
+part_system_depth(global.pt1,-4);
+global.ptype1 = part_type_create();
+part_type_shape(global.ptype1,pt_shape_flare);
+part_type_colour2(global.ptype1,c_fuchsia,c_aqua);
+part_type_alpha2(global.ptype1,0.75,0);
+//part_type_size(global.ptype1,0.1,0.2,0,0.05);
+part_type_scale(global.ptype1,0.3,0.3);
+part_type_life(global.ptype1,20,40);
+part_type_direction(global.ptype1,0,360,0,10);
+part_type_speed(global.ptype1,0.1,0.25,0,0.1);
+//part_type_gravity(global.ptype1,1,270);
 </string>
           </argument>
         </arguments>
@@ -84,6 +101,29 @@ message_length = string_length(message[message_current]); //get the number of ch
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>instance_create(64,160,obj_player);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
@@ -104,8 +144,15 @@ message_length = string_length(message[message_current]); //get the number of ch
             <string>///PAUSE GAME SITUATIONS (important)
 if message_current != 0 || instance_exists(obj_alternate_text) //2 versions if text is on
     || transitiontimer &gt; 0 || pause = 1 //checks if room transition or pause game is on
+{
     global.action = 0;
-else global.action = 1;
+    //physics_pause_enable(true);
+}
+else
+{
+    global.action = 1;
+    //physics_pause_enable(false);
+}
 if keyboard_check_pressed(key_start)
 {
     if pause = 1
@@ -166,9 +213,12 @@ if (instance_exists(viewfollow))
         }
     }
 }
+if instance_exists(subroom)
+{
 instance_deactivate_all(1); //deactivate all for optimization, then activate subroom:
 instance_activate_region(subroom.x-32,subroom.y-32,subroom.x2-subroom.x+32,
     subroom.y2-subroom.y+32,1); //+-32 makes sure nearby rooms are activated too
+}
 if object_exists(obj_rope)
     instance_activate_object(obj_rope);
 if object_exists(obj_player)
@@ -238,6 +288,43 @@ else
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.fname = "savefile.ini" //save file name
+
+
+if !file_exists(global.fname) //create ini if it doesn't exists
+{
+    set_variables(); //set the variables to their default values
+    save(); //update the ini file with the info
+}
+
+ini_open(global.fname); //open and read the ini and give the values to variables
+
+load();
+
+ini_close(); //close the ini file
+physics_pause_enable(false);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -266,17 +353,22 @@ draw_rectangle(view_xview[1]+64,view_yview[1],view_xview[1]+64+hlimit,view_yview
 draw_set_colour(c_lime);
 draw_set_font(font0);
 draw_text_ext(view_xview[1]+64,view_yview[1],message_draw,-1,hlimit);
+if instance_exists(obj_player) draw_sprite(spr_koskicon,ceil(global.helth-1),64,0);
 //debug:
 //draw_text(view_xview[1],view_yview[1],characters);
 //draw_text(view_xview[1],view_yview[1]+16,message_length);
 //draw_text(view_xview[1],view_yview[1]+32,global.action);
+draw_text(x,y,global.player_x);
+ini_open(global.fname);
+draw_text(x,y+16,ini_read_real("GAME","player_x",0));
+ini_close();
 }
+background_x[0] = (view_xview[0]);
+background_y[0] = (view_yview[0]);
 /*else
 {
     physics_world_draw_debug(phy_debug_render_shapes);
 }
-background_x[0] = (view_xview[0]);
-background_y[0] = (view_yview[0]);
 </string>
           </argument>
         </arguments>
@@ -322,7 +414,8 @@ background_y[0] = (view_yview[0]);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>game_restart();
+            <string>//game_restart();
+reset();
 </string>
           </argument>
         </arguments>

@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>scr_controls0();
+x = global.player_x;
+y = global.player_y;
 
 horizontal = 0; //checks whether player is moving
 spede = 2; //speed constant (for acceleration in case of physics engine)
@@ -40,11 +42,17 @@ rope = noone;
 ropelength = 64;
 f = 64; //force variable when hanging on rope
 
+damage = 0;
+
+//GRAPHICS
+s = 0;
+spr[0] = sprite0;
+spr[1] = spr_walk;
+spr[2] = spr_run;
+spr[3] = spr_jump;
+spr[4] = spr_dam;
 xscale = 1; //basically for graphics to mirror player sideways when needed, 1=right -1=left
 xscale2 = 1; //xscale for graphics
-
-helth = 5;
-damage = 0;
 
 //CAMERA
 obj_master.viewfollow = id;
@@ -120,6 +128,8 @@ phy_active = 1;
             <kind>1</kind>
             <string>xx = phy_position_x; //coordination initialization, since physics have
 yy = phy_position_y; //own coordinates calculation
+global.player_x = xx;
+global.player_y = yy;
 
 phy_active = global.action; //if game is paused etc, doesn't calculate physics
 if obj_master.viewfollow = noone
@@ -134,49 +144,41 @@ else if global.action = 1 //if game is not paused/texting, calls controls script
     scr_controls1(key_l,key_r,key_u,key_d,key_A,key_B,key_X);
 
 //Moving
-if horizontal != 0 //|| damage &gt; 0
+if horizontal != 0 &amp;&amp; damage = 0 //|| damage &gt; 0
 {
     meno = xscale * max(1,spede*gump);
-if abs(phy_speed_x) &lt; abs(meno)//if any additional speed doesn't exceed player's speed (?)
-{
-
-if !physics_test_overlap(xx+meno,yy-1,phy_rotation,obj_slock)
-{
-    physics_apply_local_force(0,0,meno,0); //ground
-    if jumping = 0 &amp;&amp; gump = 0 physics_apply_local_force(0,0,0,-abs(meno));//PURKKAAA!!1!
+    s = 1+gump; //walking or running sprite
+    if abs(phy_speed_x) &lt; abs(meno)//if any additional speed doesn't exceed player's speed (?)
+    {
+        if !physics_test_overlap(xx+meno,yy-1,phy_rotation,obj_slock)
+        {
+            physics_apply_local_force(0,0,meno,0); //ground
+            if jumping = 0 &amp;&amp; gump = 0
+                physics_apply_local_force(0,0,0,-abs(meno)/2);//PURKKAA!1!
+        }
+        else if !physics_test_overlap(xx+meno/4,yy-(abs(meno*2)),phy_rotation,obj_slock)
+            &amp;&amp; jumping = 0 //prevents some slope boosted jumps
+            physics_apply_local_force(0,0,meno/4,-(abs(meno))); //slope up
+    }
 }
-else if !physics_test_overlap(xx+meno/4,yy-(abs(meno*2)),phy_rotation,obj_slock)
-    &amp;&amp; jumping = 0 //prevents some slope boosted jumps
-    physics_apply_local_force(0,0,meno/4,-(abs(meno))); //slope up
-}
-}
+else if damage = 1 s = 4; //damage sprite
+else if abs(phy_speed_y) &gt; 0.2 &amp;&amp; (!physics_test_overlap(xx+8,yy+16,phy_rotation,obj_slock)
+    || !physics_test_overlap(xx-8,yy+16,phy_rotation,obj_slock))
+    s = 3; //jump sprite
+else s = 0; //idle sprite
 
 if damage = 1 &amp;&amp; alarm[1] = -1 alarm[1] = room_speed/2; //delay until can take dmg again
-if helth &lt;= 0 room_restart(); //THAT'S A LOTTA DAMAGE
+if global.helth &lt;= 0 //THAT'S A LOTTA DAMAGE
+{
+    //alarm[2] = room_speed*2; //put stuff into that event, please
+    //if global.save game_load("save.dat");
+    //else room_restart();
+    //with(obj_master) 
+    //phy_speed_x = 0;
+    //phy_speed_y = 0;
+    load();
+}
 /*
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="obj_trap">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>helth = 0;
 </string>
           </argument>
         </arguments>
@@ -201,12 +203,35 @@ if helth &lt;= 0 room_restart(); //THAT'S A LOTTA DAMAGE
             <kind>1</kind>
             <string>if damage = 0
 {
-    helth -= 0.5;
+    global.helth -= 0.5;
     damage = 1;
     if other.direction &lt; 90 || other.direction &gt; 270
         physics_apply_local_impulse(0,0,jumpspeed,-jumpspeed);
     else physics_apply_local_impulse(0,0,-jumpspeed,-jumpspeed);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_trap">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.helth = 0;
 </string>
           </argument>
         </arguments>
@@ -232,7 +257,7 @@ if helth &lt;= 0 room_restart(); //THAT'S A LOTTA DAMAGE
             <string>if other.status = 2
 {
     if damage = 0
-        helth -= 1;
+        global.helth -= 1;
     damage = 1;
 }
 </string>
@@ -303,19 +328,27 @@ if helth &lt;= 0 room_restart(); //THAT'S A LOTTA DAMAGE
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed = 0.25;
-var xs = xscale;
-if controls = 1 xs = xscale2;
+            <string>var xs = xscale;
+if controls = 1
+{
+    xs = xscale2;
+    image_speed = 0.25*sign(horizontal*xscale2); //backward moving reverses subimages
+}
+else image_speed = 0.25;
 var w = 0;
-if horizontal != 0 &amp;&amp; global.action = 1 w = image_index;
+if horizontal != 0 &amp;&amp; global.action = 1 &amp;&amp; s != 3 //(phy_speed_y = 0)
+    w = image_index;
+else if phy_speed_y &gt; 0 w = 1;
+else w = 0;
 var rd = direction;
 if instance_exists(rope) rd = point_direction(xx,yy,rope.x,rope.y);
 draw_sprite_ext(spr_arm,global.unlock[0],round(x),round(y),image_xscale,xs,rd,c_white,1);
-draw_sprite_ext(sprite_index,w,round(x),round(y),xs,image_yscale,0,c_white,1);
+draw_sprite_ext(spr[s],w,round(x),round(y),xs,image_yscale,0,c_white,1);
 //status banner or such on player's upper side, if needed:
 //draw_sprite(sprite2,image_index,round(x),round(y));
 draw_sprite_ext(spr_aim,0,round(mouse_x),round(mouse_y),1,1,0,c_white,1); //x,y,direction,-32
 //cursor_sprite = spr_aim;
+//draw_text(x,y-16,helth);
 </string>
           </argument>
         </arguments>

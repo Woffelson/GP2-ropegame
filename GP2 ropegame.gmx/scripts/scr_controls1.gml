@@ -18,6 +18,10 @@ if controls = 1 //key_B = mb_left
     direction = point_direction(xx,yy,mouse_x,mouse_y); //replace this with key version:
     inst = instance_place(xx,yy,obj_lad); //checks collision with ladders
     if inst != noone && d != 0 phy_speed_y = -d;
+    if instance_exists(rope)
+    {
+        ropelength = clamp(ropelength-d,8,256);
+    }
 }
 else
 {

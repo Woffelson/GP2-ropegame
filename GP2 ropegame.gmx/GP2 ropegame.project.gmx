@@ -12,6 +12,10 @@
       <sprite>sprites\spr_walk</sprite>
       <sprite>sprites\spr_rope</sprite>
       <sprite>sprites\spr_aim</sprite>
+      <sprite>sprites\spr_run</sprite>
+      <sprite>sprites\spr_jump</sprite>
+      <sprite>sprites\spr_koskicon</sprite>
+      <sprite>sprites\spr_dam</sprite>
     </sprites>
     <sprite>sprites\sprite2</sprite>
     <sprites name="invisible blocks">
@@ -38,6 +42,7 @@
       <sprite>sprites\spr_lad</sprite>
       <sprite>sprites\spr_crate1</sprite>
       <sprite>sprites\spr_trap</sprite>
+      <sprite>sprites\spr_stone</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -51,29 +56,39 @@
     <script>scripts\view_center_on.gml</script>
     <script>scripts\scr_ropeforce.gml</script>
     <script>scripts\scr_alternate_text.gml</script>
+    <scripts name="saves">
+      <script>scripts\set_variables.gml</script>
+      <script>scripts\save.gml</script>
+      <script>scripts\load.gml</script>
+      <script>scripts\reset.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_master</object>
+    <objects name="system">
+      <object>objects\obj_master</object>
+      <object>objects\obj_subroom</object>
+      <object>objects\obj_text</object>
+      <object>objects\obj_alternate_text</object>
+    </objects>
     <object>objects\obj_player</object>
+    <object>objects\obj_rope</object>
     <objects name="blocks">
       <object>objects\obj_dlock</object>
       <object>objects\obj_block</object>
       <object>objects\obj_tree</object>
       <object>objects\obj_tree2</object>
       <object>objects\obj_slock</object>
+      <object>objects\obj_box</object>
+      <object>objects\obj_stone</object>
     </objects>
-    <object>objects\obj_box</object>
-    <object>objects\obj_rope</object>
-    <object>objects\obj_subroom</object>
-    <object>objects\obj_text</object>
     <object>objects\obj_lad</object>
-    <object>objects\obj_alternate_text</object>
     <object>objects\obj_bear</object>
     <object>objects\obj_trap</object>
     <object>objects\obj_spike</object>
+    <object>objects\object17</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room2</room>

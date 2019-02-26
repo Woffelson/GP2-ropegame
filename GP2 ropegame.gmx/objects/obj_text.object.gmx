@@ -74,16 +74,23 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
                 message_draw = ""; //clear the drawn text
             }*/
             start_write = 1;
-            switch(happening)
-            {
-                case 1: global.unlock[0] = 1; //unlock rope
-                break;
-            }
         }
         else
         {
+            
             if (mode = 0 || mode = 2) active = 0; //back to inactive, unless...
             else instance_destroy();//as one time lore has been told, say no more and begone
+            switch(happening)
+            {
+                case 1: 
+                {   
+                    global.unlock[0] = 1; //unlock rope
+                    //game_save("save.dat");
+                    //global.save = 1;
+                    save();
+                }
+                break;
+            }
         }
     }
 }
