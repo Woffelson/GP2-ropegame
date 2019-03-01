@@ -3,4 +3,4 @@ set_variables();
 save();
 
 //restart the game
-game_restart();
+room_restart();//game_restart();

@@ -4,6 +4,7 @@
 //global.saves = 0; //amount of times we've saved (0 by default)
 view_xview[0] = 0;
 view_yview[0] = 0;
+//global.subroom = noone; //no work, sniff
 global.player_x = 64; //player x position (half way across the room by default)
 global.player_y = 160; //player y position (half way down the room by default);
 

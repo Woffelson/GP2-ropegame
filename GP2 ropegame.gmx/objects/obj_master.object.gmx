@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.action = 1;
+            <string>global.action = 0;
 global.saves = 0;
 viewfollow = noone;
 subroom = noone;
@@ -33,11 +33,16 @@ transitiontimer = 0;
 subroomprev = noone;
 pause = 0;
 
+game = 0;
+menuu = 0;
+m[0] = "New Game";
+m[1] = "Load Game";
+m[2] = "Quit Game";
+global.fname = "savefile.ini" //save file name
+
 scr_controls0();
 
 global.unlockables = 2; //counts unlockable variables in array (more info: set_variables)
-
-alarm[0] = 5; //slight delay to load file
 
 //particles, yeeaayy
 global.pt1 = part_system_create();
@@ -118,7 +123,8 @@ message_length = string_length(message[message_current]); //get the number of ch
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_create(64,160,obj_player);
+            <string>global.action = 1;
+instance_create(global.player_x,global.player_y,obj_player);
 </string>
           </argument>
         </arguments>
@@ -141,23 +147,80 @@ message_length = string_length(message[message_current]); //get the number of ch
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Main menu
+if room = menu
+{
+var i;
+for (i=0; i&lt;=2; i++)
+if point_in_rectangle(mouse_x,mouse_y,room_width/2-64,room_height/2-64+(i*48),
+    room_width/2+64,room_height/2-32+(i*48))
+{
+    menuu = i+1;
+    if mouse_check_button_pressed(mb_left)
+    switch (menuu)
+    {
+    case 1:
+    {   
+        game = 1; //reset();
+        room_goto_next(); //temporary, rooms must be included in save file!!
+        break;
+    }
+    case 2:
+    {
+        if file_exists(global.fname)
+        {
+        game = 2 //load();
+        room_goto_next(); //temporary, rooms must be included in save file!!
+        break;
+        }
+    }
+    case 3:
+    {
+        game_end();
+        break;
+    }
+    }
+}
+else menuu = 0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///PAUSE GAME SITUATIONS (important)
+if room != menu
+{
 if message_current != 0 || instance_exists(obj_alternate_text) //2 versions if text is on
     || transitiontimer &gt; 0 || pause = 1 //checks if room transition or pause game is on
 {
     global.action = 0;
-    //physics_pause_enable(true);
 }
 else
 {
     global.action = 1;
-    //physics_pause_enable(false);
 }
 if keyboard_check_pressed(key_start)
 {
     if pause = 1
         pause = 0;
     else pause = 1;
+}
 }
 </string>
           </argument>
@@ -180,13 +243,16 @@ if keyboard_check_pressed(key_start)
           <argument>
             <kind>1</kind>
             <string>/// VIEW
+if room != menu
+{
+    var sub = subroom;
 if (instance_exists(viewfollow)) 
 {
-    if (subroom != noone &amp;&amp; transitiontimer &lt;= 0) 
+    if (sub != noone &amp;&amp; transitiontimer &lt;= 0) 
     {
-        view_center_on(0,viewfollow.x,viewfollow.y,subroom.x,subroom.y,subroom.x2,subroom.y2);
+        view_center_on(0,viewfollow.x,viewfollow.y,sub.x,sub.y,sub.x2,sub.y2);
 
-        if (subroom != subroomprev) 
+        if (sub != subroomprev) 
         {
             if (subroomprev != noone) 
             {
@@ -201,23 +267,23 @@ if (instance_exists(viewfollow))
         x1 = clamp(viewfollow.x - view_wview[0]/2,subroomprev.x1,subroomprev.x2 - view_wview);
         y1 = clamp(viewfollow.y - view_hview[0]/2,subroomprev.y1,subroomprev.y2 - view_hview);
         
-        x2 = clamp(viewfollow.x - view_wview[0]/2,subroom.x1,subroom.x2 - view_wview);
-        y2 = clamp(viewfollow.y - view_hview[0]/2,subroom.y1,subroom.y2 - view_hview);
+        x2 = clamp(viewfollow.x - view_wview[0]/2,sub.x1,sub.x2 - view_wview);
+        y2 = clamp(viewfollow.y - view_hview[0]/2,sub.y1,sub.y2 - view_hview);
         
         view_xview = lerp(x1,x2,transitiontimer);
         view_yview = lerp(y1,y2,transitiontimer);
         if (transitiontimer &gt;= 1) 
         {
-            subroomprev = subroom;
+            subroomprev = sub;
             transitiontimer = 0;
         }
     }
 }
-if instance_exists(subroom)
+if instance_exists(sub)
 {
 instance_deactivate_all(1); //deactivate all for optimization, then activate subroom:
-instance_activate_region(subroom.x-32,subroom.y-32,subroom.x2-subroom.x+32,
-    subroom.y2-subroom.y+32,1); //+-32 makes sure nearby rooms are activated too
+instance_activate_region(subroom.x-32,sub.y-32,sub.x2-sub.x+32,
+    sub.y2-sub.y+32,1); //+-32 makes sure nearby rooms are activated too
 }
 if object_exists(obj_rope)
     instance_activate_object(obj_rope);
@@ -225,6 +291,7 @@ if object_exists(obj_player)
     instance_activate_object(obj_player);
 if object_exists(obj_alternate_text)
     instance_activate_object(obj_alternate_text);
+}
 </string>
           </argument>
         </arguments>
@@ -246,6 +313,8 @@ if object_exists(obj_alternate_text)
           <argument>
             <kind>1</kind>
             <string>///TEXT
+if room != menu
+{
 var klik = key_A;
 if (characters &lt; message_length)
 { //if current character count is less than the amount in current message* 
@@ -283,6 +352,51 @@ else
         }
     }
 }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//if room = menu room_goto_next();
+if room != menu 
+{
+    alarm[0] = 5; //slight delay to load file
+    if game = 1
+    {
+    if !file_exists(global.fname) //create ini if it doesn't exists
+    {
+        set_variables(); //set the variables to their default values
+        save(); //update the ini file with the info
+    }
+
+    ini_open(global.fname); //open and read the ini and give the values to variables
+
+    load();
+
+    ini_close(); //close the ini file
+    reset();
+    }
+    else if game = 2 load();
+    game = 0;
+}
 </string>
           </argument>
         </arguments>
@@ -305,22 +419,7 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.fname = "savefile.ini" //save file name
-
-
-if !file_exists(global.fname) //create ini if it doesn't exists
-{
-    set_variables(); //set the variables to their default values
-    save(); //update the ini file with the info
-}
-
-ini_open(global.fname); //open and read the ini and give the values to variables
-
-load();
-
-ini_close(); //close the ini file
-physics_pause_enable(false);
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -342,14 +441,30 @@ physics_pause_enable(false);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//window_set_cursor(cr_none);
+            <string>if room = menu
+{
+    draw_set_colour(c_gray);
+    draw_rectangle(room_width/2-64,room_height/2-64,room_width/2+64,room_height/2-32,0);
+    draw_rectangle(room_width/2-64,room_height/2-16,room_width/2+64,room_height/2+16,0);
+    draw_rectangle(room_width/2-64,room_height/2+32,room_width/2+64,room_height/2+64,0);
+    draw_set_font(font0);
+    draw_set_colour(c_purple);
+    draw_text(room_width/2-64,room_height/2-128,"Hazard \#32");
+    draw_set_colour(c_black);
+    var i;
+    for (i=0; i&lt;=2; i++)
+    draw_text(room_width/2-32,room_height/2-48+(i*48),m[i]);
+}
+else //if room != menu
+{
+//window_set_cursor(cr_none);
 if view_current = 1 //makes sure things are being drawn exclusively on status bar view
 {
 ///TEXT
 draw_set_colour(c_dkgray);
 draw_rectangle(view_xview[1],view_yview[1],view_wview[1],view_hview[1],0)
 draw_set_colour(c_black);
-draw_rectangle(view_xview[1]+64,view_yview[1],view_xview[1]+64+hlimit,view_yview[1]+vlimit,0);
+draw_rectangle(view_xview[1]+64,view_yview[1],view_xview[1]+128,view_yview[1]+vlimit,0);
 draw_set_colour(c_lime);
 draw_set_font(font0);
 draw_text_ext(view_xview[1]+64,view_yview[1],message_draw,-1,hlimit);
@@ -358,13 +473,14 @@ if instance_exists(obj_player) draw_sprite(spr_koskicon,ceil(global.helth-1),64,
 //draw_text(view_xview[1],view_yview[1],characters);
 //draw_text(view_xview[1],view_yview[1]+16,message_length);
 //draw_text(view_xview[1],view_yview[1]+32,global.action);
-draw_text(x,y,global.player_x);
+draw_text(x,y,view_xview[0]);
 ini_open(global.fname);
-draw_text(x,y+16,ini_read_real("GAME","player_x",0));
+draw_text(x,y+16,ini_read_real("GAME","viewx",0));
 ini_close();
 }
 background_x[0] = (view_xview[0]);
 background_y[0] = (view_yview[0]);
+}
 /*else
 {
     physics_world_draw_debug(phy_debug_render_shapes);
@@ -414,8 +530,8 @@ background_y[0] = (view_yview[0]);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//game_restart();
-reset();
+            <string>game_restart();
+//reset();
 </string>
           </argument>
         </arguments>

@@ -53,8 +53,9 @@ image_index = choose(0,1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(obj_master)
-    sub = obj_master.subroom;
+            <string>event_inherited();
+/*if global.subroom != noone //instance_exists(obj_master)
+    sub = global.subroom;
 if sub != noone
 if point_in_rectangle(x,y,sub.x1,sub.y1,sub.x2,sub.y2) //checks current subroom
 {
@@ -86,7 +87,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Collision happens
+            <string>///Collision happens
 </string>
           </argument>
         </arguments>
@@ -115,7 +116,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_block">
+    <event eventtype="4" ename="obj_slock">
       <action>
         <libid>1</libid>
         <id>603</id>

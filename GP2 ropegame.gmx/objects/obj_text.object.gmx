@@ -87,7 +87,6 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
                     global.unlock[0] = 1; //unlock rope
                     //game_save("save.dat");
                     //global.save = 1;
-                    save();
                 }
                 break;
             }
