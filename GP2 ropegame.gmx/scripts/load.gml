@@ -10,6 +10,7 @@ global.player_x=ini_read_real("GAME","player_x",0); //load AND assign the player
 global.player_y=ini_read_real("GAME","player_y",0); //load AND assign the player's y position
 
 global.helth = ini_read_real("GAME","helth",0);
+global.events = ini_read_real("GAME","events",0);
 
 //move the player to the loaded position
 if instance_exists(obj_player)

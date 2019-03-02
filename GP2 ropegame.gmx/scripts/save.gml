@@ -10,6 +10,7 @@ ini_write_real("GAME","player_x",global.player_x); //save the player x position 
 ini_write_real("GAME","player_y",global.player_y); //save the player y position variable under "player_y"
 
 ini_write_real("GAME","helth",global.helth);
+ini_write_real("GAME","events",global.events);
 
 for (i=0;i<global.unlockables;i++)//loop initialized unlock variables (handy if you're lazyass writer like me)
 ini_write_real("GAME","unlock"+string(i),global.unlock[i]);

@@ -9,6 +9,7 @@ global.player_x = 64; //player x position (half way across the room by default)
 global.player_y = 160; //player y position (half way down the room by default);
 
 global.helth = 4;
+global.events = 0; //keeps track on one time happenings like dialogues
 
 for (i=0;i<global.unlockables;i++)//loop initialized unlockables (handy if you're lazyass writer like me)
 global.unlock[i] = 0; //i0=ninja rope, i1=door1

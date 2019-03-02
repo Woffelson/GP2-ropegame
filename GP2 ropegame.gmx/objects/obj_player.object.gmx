@@ -164,13 +164,13 @@ if horizontal != 0 &amp;&amp; damage = 0 &amp;&amp; s != 5//|| damage &gt; 0
     {
         if !physics_test_overlap(xx+meno,yy-1,phy_rotation,obj_slock)
         {
-            physics_apply_local_force(0,0,meno,0); //ground
+            physics_apply_local_force(0,0,meno/2,0); //ground
             if jumping = 0 &amp;&amp; gump = 0
-                physics_apply_local_force(0,0,0,-abs(meno)/2);//PURKKAA!1!
+                physics_apply_local_force(0,0,0,-abs(meno)/1.5);//PURKKAA!1!
         }
-        else if !physics_test_overlap(xx+meno/4,yy-(abs(meno*2)),phy_rotation,obj_slock)
+        else if !physics_test_overlap(xx+meno,yy-(abs(meno*2)),phy_rotation,obj_slock)
             &amp;&amp; jumping = 0 //prevents some slope boosted jumps
-            physics_apply_local_force(0,0,meno/4,-(abs(meno))); //slope up
+            physics_apply_local_force(0,0,meno,-(abs(meno))); //slope up
     }
 }
 if s != 5 &amp;&amp; damage = 1 s = 4; //damage sprite
@@ -398,8 +398,8 @@ draw_sprite_ext(spr_arm,global.unlock[0],round(x),round(y),image_xscale,xs,rd,c_
 draw_sprite_ext(spr[s],w,round(x),round(y),xs,image_yscale,0,c_white,1);
 //status banner or such on player's upper side, if needed:
 //draw_sprite(sprite2,image_index,round(x),round(y));
-draw_sprite_ext(spr_aim,0,round(mouse_x),round(mouse_y),1,1,0,c_white,1); //x,y,direction,-32
-//cursor_sprite = spr_aim;
+//draw_sprite_ext(spr_aim,0,round(mouse_x),round(mouse_y),1,1,0,c_white,1); //x,y,direction,-32
+
 //draw_text(x,y-16,helth);
 </string>
           </argument>

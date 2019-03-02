@@ -79,8 +79,8 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if saved = 0 draw_sprite(sprite_index,image_index,x,y-32);
-draw_sprite(spr_ship,0,x+16,y);
+            <string>if room = room2 draw_sprite(spr_ship,0,x,y);
+if saved = 0 draw_sprite(sprite_index,image_index,x,y-32);
 </string>
           </argument>
         </arguments>

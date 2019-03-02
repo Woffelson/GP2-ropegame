@@ -33,6 +33,7 @@ mode = 0; //with modes 1&amp;3 could destroy itself after text is done (one time
 startti = 0; //starts at stored message n (stored in obj_master create)
 endi = 0; //ends at stored message n (stored in obj_master create)
 happening = 0; //triggers additional extra, like unlocking stuff
+event = 100; //smaller the variable, earlier gets destroyed permanently
 
 //so, mode 0: keytrg,eternal 1: keytrg,mortal 2: instatrg,eternal 3: instatrg,mortal
 </string>
@@ -60,19 +61,12 @@ happening = 0; //triggers additional extra, like unlocking stuff
             <string>///v2
 if active = 1 //&amp;&amp; instance_exists(obj_master)
 {
-    //if obj_master.message_current = 0 //this can be either sign of start or end...
     {
         if start_write = 0
         {//start texting if obj_senpai still shy OwO
             scr_alternate_text(startti, 0.5, 256, 0);
-            /*with (obj_master)
-            {
-                message_current = other.startti;
-                messend = other.endi;
-                message_length = string_length(message[message_current]);
-                characters = 0; //set the characters back to 0
-                message_draw = ""; //clear the drawn text
-            }*/
+            //if endi = 0 scr_alternate_text(startti,0.5,256,0,startti); //FUTURECODE
+            //else scr_alternate_text(startti, 0.5, 256, 0, endi);//do argument4 first
             start_write = 1;
         }
         else
@@ -85,16 +79,15 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
                 case 1: 
                 {   
                     global.unlock[0] = 1; //unlock rope
-                    //game_save("save.dat");
-                    //global.save = 1;
+                    break;
                 }
-                break;
             }
         }
     }
 }
 else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
     start_write = 0; //reset until we start texting again, bye! UwU
+if event &lt;= global.events instance_destroy();//when game gets further pls don't appear
 </string>
           </argument>
         </arguments>

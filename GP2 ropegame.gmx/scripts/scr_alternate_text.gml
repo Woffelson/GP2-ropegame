@@ -9,6 +9,7 @@ with (txt){
     padding = 4;
     maxlength = 188;//view_wview[0];
     text = t[argument0]; //text = argument0;
+    //textend = t[argument4]; //last line in dialogues for example
     spd = argument1;
     font = font0;
     
