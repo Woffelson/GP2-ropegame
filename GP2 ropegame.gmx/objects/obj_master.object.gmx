@@ -42,21 +42,40 @@ global.fname = "savefile.ini" //save file name
 
 scr_controls0();
 
-global.unlockables = 2; //counts unlockable variables in array (more info: set_variables)
+global.unlockables = 5; //counts unlockable variables in array (more info: set_variables)
 
-//particles, yeeaayy
+//particles, yeeaayy, rope:
 global.pt1 = part_system_create();
 part_system_depth(global.pt1,-4);
 global.ptype1 = part_type_create();
 part_type_shape(global.ptype1,pt_shape_flare);
 part_type_colour2(global.ptype1,c_fuchsia,c_aqua);
 part_type_alpha2(global.ptype1,0.75,0);
-//part_type_size(global.ptype1,0.1,0.2,0,0.05);
 part_type_scale(global.ptype1,0.3,0.3);
 part_type_life(global.ptype1,20,40);
 part_type_direction(global.ptype1,0,360,0,10);
 part_type_speed(global.ptype1,0.1,0.25,0,0.1);
-//part_type_gravity(global.ptype1,1,270);
+//smoke:
+global.ptype2 = part_type_create();
+part_type_gravity(global.ptype2,0.025,90);
+part_type_shape(global.ptype2,pt_shape_smoke);
+part_type_size(global.ptype2,0.5,0.75,0,0.05);
+part_type_colour1(global.ptype2,c_dkgray);
+part_type_alpha3(global.ptype2,0.25,0.5,0);
+part_type_life(global.ptype2,30,90);
+part_type_direction(global.ptype2,0,360,0,10);
+part_type_speed(global.ptype2,0.1,0.25,0,0.1);
+//poison spike:
+global.ptype3 = part_type_create();
+part_type_gravity(global.ptype3,0.01,90);
+part_type_shape(global.ptype3,pt_shape_flare);
+part_type_scale(global.ptype3,0.1,0.1);
+//part_type_size(global.ptype3,0.5,0.75,0,0.05);
+part_type_colour1(global.ptype3,c_lime);
+part_type_alpha3(global.ptype3,0.25,0.5,0);
+part_type_life(global.ptype3,20,40);
+part_type_direction(global.ptype3,0,360,0,10);
+part_type_speed(global.ptype3,0.1,0.25,0,0.1);
 </string>
           </argument>
         </arguments>
@@ -350,6 +369,44 @@ else
             message_current = 0;
             message_draw = "";
         }
+    }
+}
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///One way platform
+if instance_exists(obj_player)
+{
+if (obj_player.phy_speed_y &lt;0 || keyboard_check(key_d))
+{
+    with(obj_owp1)
+    {
+        instance_change(obj_owp2, true);
+    }
+}
+else
+{
+    with(obj_owp2)
+    {
+        instance_change(obj_owp1, true);
     }
 }
 }

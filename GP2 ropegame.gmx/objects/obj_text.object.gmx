@@ -82,6 +82,7 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
                     break;
                 }
             }
+            if event != 100 global.events = event;
         }
     }
 }

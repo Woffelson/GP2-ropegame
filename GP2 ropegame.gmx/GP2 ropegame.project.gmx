@@ -4,7 +4,9 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_death</sound>
+  </sounds>
   <sprites name="sprites">
     <sprites name="player">
       <sprite>sprites\sprite0</sprite>
@@ -16,11 +18,13 @@
       <sprite>sprites\spr_jump</sprite>
       <sprite>sprites\spr_koskicon</sprite>
       <sprite>sprites\spr_dam</sprite>
+      <sprite>sprites\spr_wall</sprite>
     </sprites>
     <sprite>sprites\sprite2</sprite>
     <sprites name="invisible blocks">
       <sprite>sprites\spr_block</sprite>
       <sprite>sprites\spr_slock</sprite>
+      <sprite>sprites\spr_oneway</sprite>
       <sprite>sprites\spr_dlock</sprite>
       <sprite>sprites\spr_box</sprite>
       <sprite>sprites\spr_text</sprite>
@@ -36,6 +40,7 @@
       <sprite>sprites\spr_sentry</sprite>
       <sprite>sprites\spr_sentrystand</sprite>
       <sprite>sprites\spr_rat</sprite>
+      <sprite>sprites\spr_bullet</sprite>
     </sprites>
     <sprites name="landscape">
       <sprite>sprites\spr_tree</sprite>
@@ -47,10 +52,11 @@
       <sprite>sprites\spr_stone</sprite>
       <sprite>sprites\spr_switch</sprite>
       <sprite>sprites\spr_gate</sprite>
+      <sprite>sprites\spr_spike2</sprite>
+      <sprite>sprites\spr_ship</sprite>
     </sprites>
     <sprite>sprites\spr_verisplat</sprite>
     <sprite>sprites\spr_save</sprite>
-    <sprite>sprites\spr_ship</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -91,6 +97,8 @@
       <object>objects\obj_slock</object>
       <object>objects\obj_box</object>
       <object>objects\obj_stone</object>
+      <object>objects\obj_owp1</object>
+      <object>objects\obj_owp2</object>
     </objects>
     <object>objects\obj_lad</object>
     <objects name="mobs">

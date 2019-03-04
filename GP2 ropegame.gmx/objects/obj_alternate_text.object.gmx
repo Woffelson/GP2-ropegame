@@ -31,11 +31,23 @@ print = "";
 time = 0;
 depth = obj_master.depth-1;//depth - instance_number(obj_text); //wtf?
 
-t[0] = "Game saved. Full heath."
-t[1] = "The landing pod and my big guns are there, but I have to find another way..."
-t[2] = "Owie, my bones! Hmm, I could still wall jump back, in case I have to..."
-t[3] = "A note from a fallen comrade: 'nice bear... NONONO, AAA. Goodbye cruel world. Cancel my magazine subscriptions.'"
-t[4] = "Where're all the rifles? Only a f***ing rope launcher. Guess, I'll stick with that."
+t[0] = "Game saved. Full health.";
+t[1] = "The landing pod and my big guns are there, but I have to find another way...";
+t[2] = "Owie, my bones! Hmm, I could still wall jump back, in case I have to...";
+t[3] = "A note from a fallen comrade: 'nice bear... NONONO, AAA. Goodbye cruel world. Cancel my magazine subscriptions.'";
+t[4] = "Where're all the rifles? Only a f***ing rope launcher. Guess, I'll stick with that.";
+//scene 1 dialogue:
+/*
+t[n] = "Koski: Absolutely beautiful. You didn't mind to tell me that your facility has some fucking cannons and seeking missiles in it, huh?";
+t[n+1] = "Dr. Gutenberg: Mind your manners mister. We didn't know that those defensive mechanisms could work. The Earth and the facility have been abandoned for 600 years.";
+t[n+2] = "Koski: Yeah, and your presumption nearly killed me. Lucky for us I’m the best pilot on Mars.";
+t[n+3] = "Dr. Gutenberg: You are alive and well so we need you to proceed with the mission. You'll need to get inside the BioFuture’s facility and inside the database...";
+t[n+4] = "Koski: ...to collect crucial information about the RG-Gen virus. Yeah, I know the drill, you don't have to preach about it every minute or two.";
+t[n+5] = "Dr. Gutenberg: I presume that I don't need to underline how serious this is to success of the mission. The virus and the infected wiped and slaughtered the majority of the humans and countless animals on Earth. And it's happening it right now on Mars too.";
+t[n+6] = "Koski: I have my daughter’s life on the line so I know exactly how serious this is.";
+t[n+7] = "Dr. Gutenberg: Just contact us when you get inside the facility.";
+t[n+8] = "Koski: Sir yes sir!";
+t[n+9] = "Koski: 'InZiDe Ze FaZiLiTy.' What a f***ing mess. I need to find the ship first to collect my guns. Aaand off to save humanity once again.";
 </string>
           </argument>
         </arguments>

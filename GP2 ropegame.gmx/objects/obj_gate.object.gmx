@@ -61,14 +61,6 @@ if (pressed1 = 1 &amp;&amp; pressed2 = 1) || global.unlock[1] = 1 //last makes s
 {
     global.unlock[1] = 1;
     phy_active = 0;
-    /*var fix = physics_fixture_create(); //no wooorrrkkk
-    physics_fixture_set_circle_shape(fix, 16);
-    //physics_fixture_set_density(fix, 1.0);
-    //physics_fixture_set_sensor(fix,1);
-    //physics_fixture_set_collision_group(fix,1);
-    //physics_fixture_set_awake(fix,0);
-    physics_fixture_bind(fix,self);
-    physics_fixture_delete(fix);//*/
 }
 </string>
           </argument>

@@ -52,6 +52,7 @@ spr[2] = spr_run;
 spr[3] = spr_jump;
 spr[4] = spr_dam;
 spr[5] = spr_verisplat;
+spr[6] = spr_wall;
 xscale = 1; //basically for graphics to mirror player sideways when needed, 1=right -1=left
 xscale2 = 1; //xscale for graphics
 
@@ -136,6 +137,7 @@ phy_active = 1;
     //phy_speed_x = 0;
     //phy_speed_y = 0;
     s = 5; //splatters
+    if !audio_is_playing(snd_death) audio_play_sound(snd_death,1,0);
 }
 else
 {
@@ -157,6 +159,7 @@ else if global.action = 1 //if game is not paused/texting, calls controls script
     scr_controls1(key_l,key_r,key_u,key_d,key_A,key_B,key_X);
 
 //Moving
+var wall = 0;
 if horizontal != 0 &amp;&amp; damage = 0 &amp;&amp; s != 5//|| damage &gt; 0
 {
     meno = xscale * max(1,spede*gump);
@@ -171,9 +174,19 @@ if horizontal != 0 &amp;&amp; damage = 0 &amp;&amp; s != 5//|| damage &gt; 0
         else if !physics_test_overlap(xx+meno,yy-(abs(meno*2)),phy_rotation,obj_slock)
             &amp;&amp; jumping = 0 //prevents some slope boosted jumps
             physics_apply_local_force(0,0,meno,-(abs(meno))); //slope up
+            else
+            {
+                physics_apply_local_force(0,0,meno/4,-abs(meno/5)); //scratch wall
+                if phy_speed_y != 0 
+                {
+                    xscale2 = -horizontal;
+                    wall = 1;
+                }
+            }
     }
 }
 if s != 5 &amp;&amp; damage = 1 s = 4; //damage sprite
+else if wall = 1 s = 6;
 else if abs(phy_speed_y) &gt; 0.2 &amp;&amp; (!physics_test_overlap(xx+8,yy+16,phy_rotation,obj_slock)
     || !physics_test_overlap(xx-8,yy+16,phy_rotation,obj_slock))
     s = 3; //jump sprite

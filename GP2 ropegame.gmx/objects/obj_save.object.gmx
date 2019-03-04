@@ -49,7 +49,9 @@ image_speed = 0.25;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if distance_to_object(obj_player) &gt; 32 &amp;&amp; distance_to_object(obj_player) &lt; 200 saved = 0
+            <string>if distance_to_object(obj_player) &gt; 32 &amp;&amp; distance_to_object(obj_player) &lt; 200 
+    saved = 0;
+else if distance_to_object(obj_player) &gt; 200 saved = 1;
 if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
 {
     global.helth = 4;
@@ -79,8 +81,14 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if room = room2 draw_sprite(spr_ship,0,x,y);
-if saved = 0 draw_sprite(sprite_index,image_index,x,y-32);
+            <string>if room = room2
+{
+    draw_sprite(spr_ship,0,x,y);
+    if irandom(9) = 1 &amp;&amp; global.unlock[2] = 0
+    part_particles_create(global.pt1,x+irandom_range(-64,0),y-irandom_range(16,32),
+    global.ptype2,1);
+}
+if saved = 0 draw_sprite_ext(sprite_index,image_index,x,y-32,1,1,0,c_white,0.75);
 </string>
           </argument>
         </arguments>
