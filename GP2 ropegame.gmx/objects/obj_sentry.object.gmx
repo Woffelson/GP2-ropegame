@@ -27,10 +27,42 @@
             <kind>1</kind>
             <string>xscale = 1;
 trnspd = 4; //turning speed
-frngspd = 2; //firing speed
+frngspd = room_speed/8; //firing speed
 aimdir = 0; //aimin' direction
 alrm = 0;
 rnd = 50;
+shoot = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var b = instance_create(x,y,obj_bullet);
+with(b)
+{
+    phy_rotation = irandom_range(-other.direction-10,-other.direction+10);
+    phy_bullet = 1;
+    physics_apply_local_impulse(0,0,1,0);
+}
+//if !audio_is_playing(snd_death) audio_play_sound(snd_death,1,0);
+shoot = 0;
 </string>
           </argument>
         </arguments>
@@ -61,6 +93,11 @@ rnd = 50;
         if abs(point_direction(x,y,obj_player.x,obj_player.y)-direction) &lt; 180
             direction += aimdir
         else direction -= aimdir;
+        if shoot = 0
+        {
+            alarm[0] = frngspd;
+            shoot = 1;
+        }
     }
     else if alrm &lt; rnd
     {
@@ -134,8 +171,8 @@ draw_sprite_ext(spr_sentry,image_index,x,y,image_xscale,xscale,direction,c_white
   <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>1</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
+  <PhysicsObjectDensity>0</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
   <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
   <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>

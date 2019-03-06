@@ -26,6 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>image_speed = 0;
+if room = room3 
+{
+    if y &gt; 1216
+    sprite_index = spr_laser1;
+    else sprite_index = spr_laser2;
+}
 </string>
           </argument>
         </arguments>
@@ -44,8 +50,8 @@
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>0,24</point>
-    <point>32,24</point>
+    <point>0,16</point>
+    <point>32,16</point>
     <point>32,32</point>
     <point>0,32</point>
   </PhysicsShapePoints>

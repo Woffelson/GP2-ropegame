@@ -201,6 +201,57 @@ if damage = 1 &amp;&amp; alarm[1] = -1 alarm[1] = room_speed/2; //delay until ca
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_door">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collision happens
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_bullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if damage = 0
+{
+    damage = 1;
+    global.helth -= 0.5;
+    with(other) instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_gate">
       <action>
         <libid>1</libid>
@@ -368,7 +419,9 @@ if damage = 1 &amp;&amp; alarm[1] = -1 alarm[1] = room_speed/2; //delay until ca
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>helth = 0;
+            <string>//helth = 0;
+if room = room2 room = room3;
+else room = room2;
 </string>
           </argument>
         </arguments>

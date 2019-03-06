@@ -3,4 +3,4 @@ set_variables();
 save();
 
 //restart the game
-room_restart();//game_restart();
+room_goto(room2);//room_restart();//game_restart();

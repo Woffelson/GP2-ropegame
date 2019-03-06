@@ -1,6 +1,7 @@
 //this script saves the variables to the text file
 ini_open(global.fname) //open ini file
 
+ini_write_real("GAME","room",global.rom);
 //ini_write_real("GAME","distance",global.distance); //save the distance variable under "distance"
 //ini_write_real("GAME","saves",global.saves); //save the saves variable under "saves"
 ini_write_real("GAME","viewx",view_xview[0]);

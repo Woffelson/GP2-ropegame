@@ -1,5 +1,6 @@
 //this is a list of all the variables we want to save
 
+global.rom = room2;
 //global.distance = 0; //distance player traveled (0 by default)
 //global.saves = 0; //amount of times we've saved (0 by default)
 view_xview[0] = 0;

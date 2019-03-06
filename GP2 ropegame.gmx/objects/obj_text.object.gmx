@@ -62,7 +62,7 @@ event = 100; //smaller the variable, earlier gets destroyed permanently
 if active = 1 //&amp;&amp; instance_exists(obj_master)
 {
     {
-        if start_write = 0
+        if start_write = 0 &amp;&amp; startti != 0
         {//start texting if obj_senpai still shy OwO
             scr_alternate_text(startti, 0.5, 256, 0);
             //if endi = 0 scr_alternate_text(startti,0.5,256,0,startti); //FUTURECODE

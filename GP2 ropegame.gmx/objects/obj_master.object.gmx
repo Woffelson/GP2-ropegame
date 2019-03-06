@@ -143,6 +143,7 @@ message_length = string_length(message[message_current]); //get the number of ch
           <argument>
             <kind>1</kind>
             <string>global.action = 1;
+if !instance_exists(obj_player)
 instance_create(global.player_x,global.player_y,obj_player);
 </string>
           </argument>
@@ -432,7 +433,10 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if room = menu room_goto_next();
+            <string>viewfollow = noone;
+subroom = noone;
+transitiontimer = 0;
+subroomprev = noone;
 if room != menu 
 {
     alarm[0] = 5; //slight delay to load file

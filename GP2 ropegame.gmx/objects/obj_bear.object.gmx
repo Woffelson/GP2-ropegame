@@ -34,6 +34,7 @@ status = 0; //0 idle 1 walk 2 attack
 spede = 0.5;
 anger = 1; //when entering territory, speed factors double first with this variable
 helth = 2;
+sub = noone;
 
 idle = spr_beari;
 walk = spr_bearw;
@@ -93,7 +94,9 @@ if alrm &lt; rnd //when timer runs...
     }
     }
     if status != 2 &amp;&amp; distance_to_point(x,obj_player.y) &lt; 32 &amp;&amp; 
-    distance_to_point(obj_player.x,y) &lt; 160 //territory anger...
+        distance_to_point(obj_player.x,y) &lt; 160 //territory anger...
+        &amp;&amp; (!collision_line(x,y,obj_player.x,obj_player.y,obj_slock,1,1)
+        || !collision_line(x,y,obj_player.x,obj_player.y,obj_door,1,1))
     {
         xscale = sign(obj_player.x - x); //face player
         anger = 2;
@@ -104,7 +107,10 @@ else
 {
     alrm = 0;
     rnd = irandom_range(5,15);
-    if distance_to_object(obj_player) &lt; 96 &amp;&amp; irandom(2) = 1 status = 2; //attack
+    if distance_to_object(obj_player) &lt; 96 &amp;&amp; irandom(2) = 1
+        &amp;&amp; (!collision_line(x,y,obj_player.x,obj_player.y,obj_slock,1,1)
+        &amp;&amp; !collision_line(x,y,obj_player.x,obj_player.y,obj_door,1,1))
+        status = 2; //attack
     else status = choose(0,1,1); //randomly idle or walk
     if anger = 1 xscale = choose(xscale,xscale,xscale*-1); //randomly turn around 1/3
 }

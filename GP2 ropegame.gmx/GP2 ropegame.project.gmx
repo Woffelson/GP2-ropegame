@@ -41,6 +41,8 @@
       <sprite>sprites\spr_sentrystand</sprite>
       <sprite>sprites\spr_rat</sprite>
       <sprite>sprites\spr_bullet</sprite>
+      <sprite>sprites\spr_robw</sprite>
+      <sprite>sprites\spr_roba</sprite>
     </sprites>
     <sprites name="landscape">
       <sprite>sprites\spr_tree</sprite>
@@ -54,14 +56,22 @@
       <sprite>sprites\spr_gate</sprite>
       <sprite>sprites\spr_spike2</sprite>
       <sprite>sprites\spr_ship</sprite>
+      <sprite>sprites\spr_mine</sprite>
+      <sprite>sprites\spr_wires</sprite>
+      <sprite>sprites\spr_bar</sprite>
+      <sprite>sprites\spr_door</sprite>
+      <sprite>sprites\spr_laser2</sprite>
+      <sprite>sprites\spr_laser1</sprite>
     </sprites>
     <sprite>sprites\spr_verisplat</sprite>
     <sprite>sprites\spr_save</sprite>
+    <sprite>sprites\spr_roomchng</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\background1</background>
     <background>background\tiles</background>
+    <background>background\background3</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -86,6 +96,7 @@
       <object>objects\obj_subroom</object>
       <object>objects\obj_text</object>
       <object>objects\obj_alternate_text</object>
+      <object>objects\obj_roomchng</object>
     </objects>
     <object>objects\obj_player</object>
     <object>objects\obj_rope</object>
@@ -96,24 +107,31 @@
       <object>objects\obj_tree2</object>
       <object>objects\obj_slock</object>
       <object>objects\obj_box</object>
+      <object>objects\obj_bar</object>
       <object>objects\obj_stone</object>
       <object>objects\obj_owp1</object>
       <object>objects\obj_owp2</object>
     </objects>
-    <object>objects\obj_lad</object>
     <objects name="mobs">
       <object>objects\obj_bear</object>
+      <object>objects\obj_rob</object>
       <object>objects\obj_sentry</object>
       <object>objects\obj_rat</object>
+      <object>objects\obj_bullet</object>
     </objects>
-    <object>objects\obj_trap</object>
-    <object>objects\obj_spike</object>
-    <object>objects\obj_gate</object>
+    <objects name="Lanscape">
+      <object>objects\obj_trap</object>
+      <object>objects\obj_lad</object>
+      <object>objects\obj_spike</object>
+      <object>objects\obj_gate</object>
+      <object>objects\obj_door</object>
+    </objects>
     <object>objects\obj_save</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\menu</room>
     <room>rooms\room2</room>
+    <room>rooms\room3</room>
     <room>rooms\test</room>
     <room>rooms\template</room>
   </rooms>

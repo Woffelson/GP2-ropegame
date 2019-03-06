@@ -49,9 +49,9 @@ image_speed = 0.25;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if distance_to_object(obj_player) &gt; 32 &amp;&amp; distance_to_object(obj_player) &lt; 200 
+            <string>if distance_to_object(obj_player) &gt; 32 &amp;&amp; distance_to_object(obj_player) &lt; 300 
     saved = 0;
-else if distance_to_object(obj_player) &gt; 200 saved = 1;
+else if distance_to_object(obj_player) &gt; 300 saved = 1;
 if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
 {
     global.helth = 4;
