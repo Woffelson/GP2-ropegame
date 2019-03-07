@@ -6,6 +6,12 @@
   <NewExtensions/>
   <sounds name="sound">
     <sound>sound\snd_death</sound>
+    <sound>sound\snd_beari1</sound>
+    <sound>sound\snd_beari2</sound>
+    <sound>sound\snd_beari3</sound>
+    <sound>sound\snd_beara</sound>
+    <sound>sound\snd_wolfi</sound>
+    <sound>sound\snd_wolfa</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
@@ -42,6 +48,7 @@
       <sprite>sprites\spr_rat</sprite>
       <sprite>sprites\spr_bullet</sprite>
       <sprite>sprites\spr_robw</sprite>
+      <sprite>sprites\spr_robs</sprite>
       <sprite>sprites\spr_roba</sprite>
     </sprites>
     <sprites name="landscape">
@@ -62,14 +69,23 @@
       <sprite>sprites\spr_door</sprite>
       <sprite>sprites\spr_laser2</sprite>
       <sprite>sprites\spr_laser1</sprite>
+      <sprite>sprites\spr_trap2</sprite>
+      <sprite>sprites\spr_computer</sprite>
+      <sprite>sprites\spr_wires2</sprite>
+      <sprite>sprites\spr_supercomp</sprite>
+      <sprite>sprites\spr_jekku</sprite>
+      <sprite>sprites\spr_crusher</sprite>
+      <sprite>sprites\spr_glass</sprite>
     </sprites>
     <sprite>sprites\spr_verisplat</sprite>
     <sprite>sprites\spr_save</sprite>
     <sprite>sprites\spr_roomchng</sprite>
+    <sprite>sprites\spr_expl</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\background1</background>
+    <background>background\background4</background>
     <background>background\tiles</background>
     <background>background\background3</background>
   </backgrounds>
@@ -125,6 +141,9 @@
       <object>objects\obj_spike</object>
       <object>objects\obj_gate</object>
       <object>objects\obj_door</object>
+      <object>objects\obj_mine</object>
+      <object>objects\obj_crusher</object>
+      <object>objects\obj_glass</object>
     </objects>
     <object>objects\obj_save</object>
   </objects>

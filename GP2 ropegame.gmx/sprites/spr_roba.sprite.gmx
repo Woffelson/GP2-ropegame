@@ -7,9 +7,9 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>1</bbox_left>
+  <bbox_left>0</bbox_left>
   <bbox_right>31</bbox_right>
-  <bbox_top>4</bbox_top>
+  <bbox_top>3</bbox_top>
   <bbox_bottom>31</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
@@ -38,11 +38,5 @@
     <frame index="15">images\spr_roba_15.png</frame>
     <frame index="16">images\spr_roba_16.png</frame>
     <frame index="17">images\spr_roba_17.png</frame>
-    <frame index="18">images\spr_roba_18.png</frame>
-    <frame index="19">images\spr_roba_19.png</frame>
-    <frame index="20">images\spr_roba_20.png</frame>
-    <frame index="21">images\spr_roba_21.png</frame>
-    <frame index="22">images\spr_roba_22.png</frame>
-    <frame index="23">images\spr_roba_23.png</frame>
   </frames>
 </sprite>

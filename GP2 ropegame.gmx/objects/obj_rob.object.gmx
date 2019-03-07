@@ -35,10 +35,13 @@ spede = 0.5;
 anger = 1; //when entering territory, speed factors double first with this variable
 helth = 2;
 sub = noone;
+xx = phy_position_x;
+yy = phy_position_y;
 
 //idle = spr_beari;
 walk = spr_robw;
 attack = spr_roba;
+shoot = spr_robs;
 
 event_inherited(); //stuff from obj_box create
 </string>
@@ -64,7 +67,8 @@ event_inherited(); //stuff from obj_box create
           <argument>
             <kind>1</kind>
             <string>event_inherited(); //stuff from obj_box step
-
+xx = phy_position_x;
+yy = phy_position_y;
 if global.action = 1 &amp;&amp; instance_exists(obj_player) &amp;&amp; helth &gt; 0
 {
 if alrm &lt; rnd //when timer runs...
@@ -89,7 +93,7 @@ if alrm &lt; rnd //when timer runs...
     {
         //if sprite_index != attack image_index = 0;
         xscale = sign(obj_player.x - x); //face player
-        if phy_speed_y = 0 physics_apply_local_impulse(0,0,0.1*xscale,-0.1);
+        if phy_speed_x = 0 physics_apply_local_impulse(0,0,0.2*xscale,0);
         //alrm = 0;
         image_speed = 0.5;
         break;
@@ -119,10 +123,37 @@ else
 }
 else if helth &lt;= 0
 {
-    sprite_index = spr_verisplat;
+    sprite_index = spr_expl;
     image_speed = 0.25;
+    phy_speed_x = 0;
+    phy_speed_y = 0;
 }
 else image_speed = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_crusher">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if !physics_test_overlap(xx+8,yy+4,0,other) &amp;&amp; !physics_test_overlap(xx-8,yy+4,0,other)
+    &amp;&amp; physics_test_overlap(xx,yy-4,0,other) &amp;&amp; phy_speed_y = 0 &amp;&amp; other.image_index &lt;8
+    helth = 0;
 </string>
           </argument>
         </arguments>
@@ -197,7 +228,7 @@ helth = 0;
     alrm = rnd;
     status = 0;
 }
-else if sprite_index = spr_verisplat instance_destroy();
+else if sprite_index = spr_expl instance_destroy();
 </string>
           </argument>
         </arguments>

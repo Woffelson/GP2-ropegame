@@ -32,6 +32,8 @@ aimdir = 0; //aimin' direction
 alrm = 0;
 rnd = 50;
 shoot = 0;
+shutdown = 0;
+sw = 0; //if switches deactivate, use this
 </string>
           </argument>
         </arguments>
@@ -54,7 +56,7 @@ shoot = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var b = instance_create(x,y,obj_bullet);
+            <string>var b = instance_create(x,y+16,obj_bullet);
 with(b)
 {
     phy_rotation = irandom_range(-other.direction-10,-other.direction+10);
@@ -87,7 +89,7 @@ shoot = 0;
             <kind>1</kind>
             <string>if global.action = 1 &amp;&amp; instance_exists(obj_player)
 {
-    if !collision_line(x,y,obj_player.x,obj_player.y,obj_slock,1,1)
+    if !collision_line(x,y,obj_player.x,obj_player.y,obj_slock,1,1) &amp;&amp; shutdown = 0
     {//is there aim obstacles between?
         aimdir = trnspd*sign(point_direction(x,y,obj_player.x,obj_player.y)-direction);
         if abs(point_direction(x,y,obj_player.x,obj_player.y)-direction) &lt; 180
@@ -109,12 +111,15 @@ shoot = 0;
     else //idle, searching for possible targets
     {
         alrm = 0;
-        aimdir = irandom(360);
+        if shutdown = 1
+        aimdir = 270
+        else aimdir = irandom(360);
         rnd = choose(50,75,100);
     }
     if direction &gt; 270 || direction &lt; 90 xscale = 1; else xscale = -1;
 }
 else phy_active = global.action;
+if sw != 0 shutdown = global.unlock[sw];
 </string>
           </argument>
         </arguments>
@@ -161,7 +166,7 @@ else phy_active = global.action;
           <argument>
             <kind>1</kind>
             <string>draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,0,c_white,1);
-draw_sprite_ext(spr_sentry,image_index,x,y,image_xscale,xscale,direction,c_white,1);
+draw_sprite_ext(spr_sentry,image_index,x,y+16,image_xscale,xscale,direction,c_white,1);
 </string>
           </argument>
         </arguments>

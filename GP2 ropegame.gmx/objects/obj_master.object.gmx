@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>global.action = 0;
 global.saves = 0;
+global.alert = 0; //when final run is oonnn!!
 viewfollow = noone;
 subroom = noone;
 transitiontimer = 0;
@@ -42,7 +43,7 @@ global.fname = "savefile.ini" //save file name
 
 scr_controls0();
 
-global.unlockables = 5; //counts unlockable variables in array (more info: set_variables)
+global.unlockables = 20; //counts unlockable variables in array (more info: set_variables)
 
 //particles, yeeaayy, rope:
 global.pt1 = part_system_create();
@@ -453,7 +454,7 @@ if room != menu
     load();
 
     ini_close(); //close the ini file
-    reset();
+    reset(0);
     }
     else if game = 2 load();
     game = 0;

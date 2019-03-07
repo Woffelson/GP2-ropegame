@@ -74,11 +74,13 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
             
             if (mode = 0 || mode = 2) active = 0; //back to inactive, unless...
             else instance_destroy();//as one time lore has been told, say no more and begone
+            var i;
+            for (i=1;i&lt;global.unlockables;i++)
             switch(happening)
             {
-                case 1: 
+                case i: 
                 {   
-                    global.unlock[0] = 1; //unlock rope
+                    global.unlock[i-1] = 1; //0, unlock rope, 1+ unlock gates, traps etc...
                     break;
                 }
             }
@@ -156,7 +158,9 @@ else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/*draw_self();
+            <string>if startti = 0 &amp;&amp; happening != 0
+    draw_sprite(spr_computer,global.unlock[happening-1],x,y);
+/*draw_self();
 draw_text(x-8,y,startti);
 draw_text(x+32,y,endi);
 draw_text(x,y+16,active);

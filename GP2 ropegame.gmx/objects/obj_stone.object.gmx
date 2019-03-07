@@ -70,7 +70,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_trap">
+    <event eventtype="4" ename="obj_lad">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -93,7 +93,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_lad">
+    <event eventtype="4" ename="obj_trap">
       <action>
         <libid>1</libid>
         <id>603</id>

@@ -51,11 +51,11 @@ image_speed = 0.25;
             <kind>1</kind>
             <string>if instance_exists(obj_player)
 {
-    if distance_to_object(obj_player) &gt; 64 &amp;&amp; distance_to_object(obj_player) &lt; 90
+    if distance_to_object(obj_player) &lt; 90
         chng = 1;
-    else if distance_to_object(obj_player) &gt; 96 chng = 0;
-    if instance_place(x,y,obj_player) &amp;&amp; chng = 1 
-        &amp;&amp; keyboard_check_pressed(obj_master.key_A)
+    else chng = 0;
+    if instance_place(x,y,obj_player) &amp;&amp; chng = 1 //this could be on player's step...
+        &amp;&amp; keyboard_check_pressed(obj_master.key_A) //here it could be replaced active var
     {
         if room = room2
         {

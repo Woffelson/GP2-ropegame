@@ -26,11 +26,49 @@
           <argument>
             <kind>1</kind>
             <string>image_speed = 0;
+inactive = 0;
 if room = room3 
 {
     if y &gt; 1216
-    sprite_index = spr_laser1;
-    else sprite_index = spr_laser2;
+    sprite_index = spr_trap2;
+    else
+    {
+        sprite_index = spr_laser2;
+        phy_active = 0;
+    }
+}
+sw = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>image_index = inactive;
+if inactive = 1
+{
+    phy_active = 0;
+}
+else phy_active = 1;
+if sw != 0 
+{
+    inactive = global.unlock[sw];
 }
 </string>
           </argument>

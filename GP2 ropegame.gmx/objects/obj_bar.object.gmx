@@ -68,7 +68,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_trap">
+    <event eventtype="4" ename="obj_lad">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -91,7 +91,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_lad">
+    <event eventtype="4" ename="obj_trap">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -200,7 +200,7 @@ else phy_active = false; //if outside current subroom, no physics calculation
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext(sprite_index,image_index,x,y,1,1,-phy_rotation,c_white,1);
+            <string>draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,1,-phy_rotation,c_white,1);
 </string>
           </argument>
         </arguments>
