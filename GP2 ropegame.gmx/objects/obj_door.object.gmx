@@ -55,6 +55,7 @@ dis = 48;
 {
     if distance_to_object(obj_player) &lt;= dis //when close, open
         || (distance_to_object(obj_sentry) &lt;= dis &amp;&amp; global.unlock[sw] = 0)
+        || distance_to_object(obj_bear) &lt;= dis
     {
         if image_index &lt; 5
             image_speed = 0.1;
@@ -87,7 +88,8 @@ else
     image_index = 0;
     phy_active = 1;
 }
-if sw != 0 locked = abs(global.unlock[sw]-1);
+if sw != 0 &amp;&amp; sw != 12 locked = abs(global.unlock[sw]-1);
+else if sw = 12 locked = global.unlock[sw];
 </string>
           </argument>
         </arguments>

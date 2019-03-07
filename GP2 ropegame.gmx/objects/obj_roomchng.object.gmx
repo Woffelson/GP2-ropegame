@@ -75,6 +75,7 @@ image_speed = 0.25;
             view_xview[0] = 3840;
             view_yview[0] = 0;
         }
+        obj_master.music = 0;
     }
 }
 </string>

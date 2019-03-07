@@ -12,6 +12,8 @@
     <sound>sound\snd_beara</sound>
     <sound>sound\snd_wolfi</sound>
     <sound>sound\snd_wolfa</sound>
+    <sound>sound\snd_lvl1</sound>
+    <sound>sound\snd_lvl2</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
