@@ -64,9 +64,9 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
     {
         if start_write = 0 &amp;&amp; startti != 0
         {//start texting if obj_senpai still shy OwO
-            scr_alternate_text(startti, 0.5, 256, 0);
-            //if endi = 0 scr_alternate_text(startti,0.5,256,0,startti); //FUTURECODE
-            //else scr_alternate_text(startti, 0.5, 256, 0, endi);//do argument4 first
+            //scr_alternate_text(startti, 0.5, 256, 0);
+            if endi = 0 scr_alternate_text(startti,1,192,0,startti); //FUTURECODE
+            else scr_alternate_text(startti, 1, 128, 0, endi);//do argument4 first
             start_write = 1;
         }
         else
@@ -158,8 +158,16 @@ else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if startti = 0 &amp;&amp; happening != 0
+            <string>if happening = 3 
+{
+    if global.unlock[2] = 0 draw_sprite(spr_bodynbuild,1,x+16,y+16);
+    draw_sprite(spr_bodynbuild,0,768,544);
+}
+else if happening = 20 draw_sprite(spr_supercomp,global.unlock[happening-1],x,y);
+else if startti = 0 &amp;&amp; happening != 0
+{
     draw_sprite(spr_computer,global.unlock[happening-1],x,y);
+}
 /*draw_self();
 draw_text(x-8,y,startti);
 draw_text(x+32,y,endi);

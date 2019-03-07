@@ -83,6 +83,9 @@
     <sprite>sprites\spr_save</sprite>
     <sprite>sprites\spr_roomchng</sprite>
     <sprite>sprites\spr_expl</sprite>
+    <sprite>sprites\spr_bodynbuild</sprite>
+    <sprite>sprites\spr_gutenberg</sprite>
+    <sprite>sprites\spr_miller</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>

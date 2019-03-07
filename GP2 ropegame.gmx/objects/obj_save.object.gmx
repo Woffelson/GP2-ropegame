@@ -68,8 +68,9 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         saved = 1;
         global.helth = 4;
         save();
-        scr_alternate_text(0, 0.5, 256, 0);
+        scr_alternate_text(0, 0.5, 192, 0,0);
     }
+    if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.unlock[2] = 1 global.ship = 1;
 }
 else
 {
@@ -102,7 +103,7 @@ else
             <string>if room = room2 &amp;&amp; x &lt; 4000
 {
     draw_sprite(spr_ship,0,x,y);
-    if irandom(9) = 1 &amp;&amp; global.unlock[2] = 0
+    if irandom(9) = 1 &amp;&amp; global.unlock[2] = 0 &amp;&amp; global.ship = 0
     part_particles_create(global.pt1,x+irandom_range(-64,0),y-irandom_range(16,32),
     global.ptype2,1);
 }

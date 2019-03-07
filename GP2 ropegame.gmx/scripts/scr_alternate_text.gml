@@ -7,13 +7,14 @@ txt = instance_create(argument2, argument3, obj_alternate_text);
 
 with (txt){
     padding = 4;
-    maxlength = 188;//view_wview[0];
+    maxlength = 384;//view_wview[0];
     text = t[argument0]; //text = argument0;
-    //textend = t[argument4]; //last line in dialogues for example
+    tcount = argument0;
+    textend = argument4; //last line in dialogues for example
     spd = argument1;
     font = font0;
     
-    text_length = string_length(text);
+    text_length = string_length(t[tcount]); //text
     font_size = font_get_size(font);
     
     draw_set_font(font);

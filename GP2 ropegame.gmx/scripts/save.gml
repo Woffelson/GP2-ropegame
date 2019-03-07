@@ -12,6 +12,7 @@ ini_write_real("GAME","player_y",global.player_y); //save the player y position 
 
 ini_write_real("GAME","helth",global.helth);
 ini_write_real("GAME","events",global.events);
+ini_write_real("GAME","ship",global.ship);
 
 var i;
 for (i=0;i<global.unlockables;i++)//loop initialized unlock variables (handy if you're lazyass writer like me)

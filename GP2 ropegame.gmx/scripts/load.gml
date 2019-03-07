@@ -12,6 +12,7 @@ global.player_y=ini_read_real("GAME","player_y",0); //load AND assign the player
 
 global.helth = ini_read_real("GAME","helth",0);
 global.events = ini_read_real("GAME","events",0);
+global.ship = ini_read_real("GAME","ship",0);
 
 var i;
 for (i=0;i<global.unlockables;i++)

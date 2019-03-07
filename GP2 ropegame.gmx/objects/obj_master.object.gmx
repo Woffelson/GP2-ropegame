@@ -437,14 +437,17 @@ else
             <string>if room = room2 &amp;&amp; music = 0
 {
     audio_stop_all();
-    if !audio_is_playing(snd_lvl1) audio_play_sound(snd_lvl1,1,1);
+    if !audio_is_playing(snd_lvl1) &amp;&amp; global.alert = 0 audio_play_sound(snd_lvl1,1,1);
     music = 1
 }
 else if room = room3 &amp;&amp; music = 0
 {
     audio_stop_all();
-    if !audio_is_playing(snd_lvl2) audio_play_sound(snd_lvl2,1,1);
-    music = 1
+    if global.player_x &lt; 8320 &amp;&amp; global.alert = 0
+    {
+        if !audio_is_playing(snd_lvl2) audio_play_sound(snd_lvl2,1,1);
+        music = 1
+    }
 }
 </string>
           </argument>
@@ -569,10 +572,10 @@ if instance_exists(obj_player) draw_sprite(spr_koskicon,ceil(global.helth-1),64,
 //draw_text(view_xview[1],view_yview[1],characters);
 //draw_text(view_xview[1],view_yview[1]+16,message_length);
 //draw_text(view_xview[1],view_yview[1]+32,global.action);
-draw_text(x,y,view_xview[0]);
-ini_open(global.fname);
-draw_text(x,y+16,ini_read_real("GAME","viewx",0));
-ini_close();
+//draw_text(x,y,view_xview[0]);
+//ini_open(global.fname);
+//draw_text(x,y+16,ini_read_real("GAME","viewx",0));
+//ini_close();
 if mouse_y &lt; view_hview[1] draw_sprite_ext(spr_aim,0,mouse_x,mouse_y,1,1,0,c_white,1);
 }
 else if mouse_y &gt;= 0 draw_sprite_ext(spr_aim,0,mouse_x,mouse_y,1,1,0,c_white,1);
