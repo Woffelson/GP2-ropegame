@@ -1,4 +1,4 @@
-//scr_text("Text",speed,x,y);
+///scr_text("Text",speed,x,y);
 
 //creates an object and carries the text to an object to draw to
 
@@ -9,7 +9,7 @@ with (txt){
     padding = 4;
     maxlength = 384;//view_wview[0];
     text = t[argument0]; //text = argument0;
-    tcount = argument0;
+    tcount = argument0; //
     textend = argument4; //last line in dialogues for example
     spd = argument1;
     font = font0;
