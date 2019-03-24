@@ -163,10 +163,22 @@ else if start_write = 1 &amp;&amp; !instance_place(x,y,obj_player)
     if global.unlock[2] = 0 draw_sprite(spr_bodynbuild,1,x+16,y+16);
     draw_sprite(spr_bodynbuild,0,768,544);
 }
-else if happening = 20 draw_sprite(spr_supercomp,global.unlock[happening-1],x,y);
+else if happening = 20
+{
+    if instance_exists(obj_alternate_text)
+    {
+        if obj_alternate_text.tcount &gt;= 48
+        {
+            global.unlock[happening-1] = 1;
+            global.alert = 1;
+        }
+    }
+    draw_sprite(spr_supercomp,global.unlock[happening-1],x,y);
+}
 else if startti = 0 &amp;&amp; happening != 0
 {
     draw_sprite(spr_computer,global.unlock[happening-1],x,y);
+    sprite_index = spr_computer; //because player checks computer sound with this...
 }
 /*draw_self();
 draw_text(x-8,y,startti);

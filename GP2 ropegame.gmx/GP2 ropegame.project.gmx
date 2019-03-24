@@ -14,6 +14,17 @@
     <sound>sound\snd_wolfa</sound>
     <sound>sound\snd_lvl1</sound>
     <sound>sound\snd_lvl2</sound>
+    <sound>sound\snd_jump</sound>
+    <sound>sound\snd_launch</sound>
+    <sound>sound\snd_expl1</sound>
+    <sound>sound\snd_rob1</sound>
+    <sound>sound\snd_comp1</sound>
+    <sound>sound\snd_oof</sound>
+    <sound>sound\snd_glass</sound>
+    <sound>sound\snd_ratata</sound>
+    <sound>sound\snd_rob2</sound>
+    <sound>sound\snd_expl2</sound>
+    <sound>sound\snd_remontsreiska</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
@@ -107,6 +118,9 @@
       <script>scripts\load.gml</script>
       <script>scripts\reset.gml</script>
     </scripts>
+    <script>scripts\scr_damage.gml</script>
+    <script>scripts\inside_view.gml</script>
+    <script>scripts\timer.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>

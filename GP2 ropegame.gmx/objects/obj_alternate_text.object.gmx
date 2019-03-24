@@ -132,7 +132,7 @@ t[n+55] = "Koski: You fucker!";
             <string>///Add letters over time
 
 if(time &lt; text_length){
-    time += spd;
+    time += spd + keyboard_check(obj_master.key_A);
     print = string_copy(t[tcount],0,time);
     
 }
@@ -144,11 +144,12 @@ else
             instance_destroy();
         else //instance_destroy();
         {
-            tcount += 1;
+            tcount += 1; //keeps track on the current array written
             text_length = string_length(t[tcount]);
             print = "";
             time = 0;
         }
+        if tcount = 47 audio_play_sound(snd_comp1,1,0);
     }
 }
 </string>

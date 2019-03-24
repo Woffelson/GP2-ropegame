@@ -57,14 +57,16 @@ image_speed = 0.25;
     if instance_place(x,y,obj_player) &amp;&amp; chng = 1 //this could be on player's step...
         &amp;&amp; keyboard_check_pressed(obj_master.key_A) //here it could be replaced active var
     {
+        with (obj_player) instance_destroy();
         if room = room2
         {
             room = room3;
             global.rom = room3;
             global.player_x = 96;
-            global.player_y = 1152;
+            global.player_y = 1216;
             view_xview[0] = 0;
             view_yview[0] = 960;
+            with (obj_master) alarm[0] = 5; //didn't fix what this was supposed to fix
         }
         else 
         {
@@ -74,8 +76,10 @@ image_speed = 0.25;
             global.player_y = 256;
             view_xview[0] = 3840;
             view_yview[0] = 0;
+            with (obj_master) alarm[0] = 5;
         }
         obj_master.music = 0;
+        instance_activate_object(obj_subroom);//this might've fixed tha nasty bug...not
     }
 }
 </string>

@@ -70,7 +70,7 @@ dis = 48;
     {
         if (distance_to_object(obj_sentry) &lt;= dis &amp;&amp; image_index &lt;= 1
             &amp;&amp; global.unlock[sw] = 1)
-            locked = 1; //ad hoc door lock to block turret
+            locked = 1; //ad hoc door lock to block turret at certain place
         if image_index &gt; 1
             image_speed = -0.1;
         else
@@ -88,8 +88,9 @@ else
     image_index = 0;
     phy_active = 1;
 }
-if sw != 0 &amp;&amp; sw != 12 locked = abs(global.unlock[sw]-1);
+if sw != 0 &amp;&amp; sw != 12 &amp;&amp; sw != 99 locked = abs(global.unlock[sw]-1);
 else if sw = 12 locked = global.unlock[sw];
+else if sw = 99 &amp;&amp; global.alert = 1 locked = 0;
 </string>
           </argument>
         </arguments>

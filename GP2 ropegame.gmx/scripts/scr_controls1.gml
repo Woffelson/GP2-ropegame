@@ -57,6 +57,7 @@ if (inst.phy_speed_y = 0 && //you cannot jump on flying blocks
 {
     phy_speed_y = 0; 
     physics_apply_local_impulse(0,0,0,-jumpspeed);
+    if !audio_is_playing(snd_jump) audio_play_sound(snd_jump,1,0);
 }
 }
 if keyboard_check(argument4) && phy_speed_y < 0//holding the key jumps up higher/longer
@@ -82,6 +83,7 @@ if instance_exists(rope)
     {
     ropelength = 16;
     rope = instance_create(x,y,obj_rope);
+    if !audio_is_playing(snd_launch) audio_play_sound(snd_launch,1,0);
     with(rope) 
     {
         direction = other.direction;

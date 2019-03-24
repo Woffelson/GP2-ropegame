@@ -146,8 +146,7 @@ else
     status = choose(0,1,1); //randomly idle or walk
     if irandom(3) = 1 //&amp;&amp; point_in_rectangle(x,y,view_xview[0],view_yview[0],
         //view_xview[0]+view_wview[0],view_yview[0]+view_hview[0]) 
-         &amp;&amp; x&gt;view_xview[0] &amp;&amp; y&gt;view_yview[0] &amp;&amp; x&lt;view_xview[0]+view_wview[0] 
-         &amp;&amp; y&lt;view_yview[0]+view_hview[0] &amp;&amp; snd = 0 &amp;&amp; distance_to_object(obj_door)&gt;64
+         &amp;&amp; inside_view(0) &amp;&amp; snd = 0 &amp;&amp; distance_to_object(obj_door)&gt;64
     {
         snd = 1;
         if idle = spr_beari

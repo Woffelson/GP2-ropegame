@@ -13,6 +13,12 @@ global.helth = 4;
 global.events = -2; //keeps track on one time happenings like dialogues
 global.ship = 0;
 
+//timer vars
+global.time = 0;
+global.sec = 0;
+global.mins = 0;
+global.hour = 0;
+
 var i;
 for (i=0;i<global.unlockables;i++)//loop initialized unlockables (handy if you're lazyass writer like me)
 global.unlock[i] = 0; //i0=ninja rope, i1=door1

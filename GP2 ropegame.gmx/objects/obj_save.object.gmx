@@ -31,6 +31,7 @@ sc[0] = c_white;
 sc[1] = c_lime;
 s = 0;
 active = 0;
+escape = 1;
 </string>
           </argument>
         </arguments>
@@ -53,7 +54,23 @@ active = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if global.alert = 1 saved = 1;
+            <string>if global.alert = 1
+{
+    saved = 1;
+if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.ship = 1 &amp;&amp; distance_to_object(obj_player) &lt; 1
+    { //FINISH THE EFFIN' GAME!
+        obj_master.pause = 1;
+        if instance_exists(obj_player)
+        with (obj_player) instance_destroy();
+    }
+    if phy_position_y &gt; -128 &amp;&amp; obj_master.pause = 1//ship fliieess awayyy
+    {
+        physics_apply_local_force(0,0,-1,-1);
+        //escape += 1;
+        phy_position_y -= 2*escape;
+        phy_position_x -= 2*escape;
+    }
+}
 else
 {
 if (distance_to_object(obj_player) &gt; 1 &amp;&amp; distance_to_object(obj_player) &lt; 300)
@@ -70,7 +87,14 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         save();
         scr_alternate_text(0, 0.5, 192, 0,0);
     }
-    if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.unlock[2] = 1 global.ship = 1;
+    if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.unlock[2] = 1
+    {
+        if global.ship = 0
+        {
+            global.ship = 1;
+            audio_play_sound(snd_remontsreiska,1,0);
+        }
+    }
 }
 else
 {
@@ -103,7 +127,7 @@ else
             <string>if room = room2 &amp;&amp; x &lt; 4000
 {
     draw_sprite(spr_ship,0,x,y);
-    if irandom(9) = 1 &amp;&amp; global.unlock[2] = 0 &amp;&amp; global.ship = 0
+    if irandom(9) = 1 &amp;&amp; global.ship = 0
     part_particles_create(global.pt1,x+irandom_range(-64,0),y-irandom_range(16,32),
     global.ptype2,1);
 }

@@ -49,6 +49,7 @@
           <argument>
             <kind>1</kind>
             <string>image_speed = 0.5;
+if !audio_is_playing(snd_glass) audio_play_sound(snd_glass,1,0);
 </string>
           </argument>
         </arguments>
@@ -72,7 +73,10 @@
           <argument>
             <kind>1</kind>
             <string>if abs(other.phy_speed_y) &gt; 1
+{
     image_speed = 0.5;
+    if !audio_is_playing(snd_glass) audio_play_sound(snd_glass,1,0);
+}
 </string>
           </argument>
         </arguments>
@@ -96,7 +100,10 @@
           <argument>
             <kind>1</kind>
             <string>if other.phy_speed &gt; 1 &amp;&amp; image_yscale = 1
+{
     image_speed = 0.5;
+    if !audio_is_playing(snd_glass) audio_play_sound(snd_glass,1,0);
+}
 </string>
           </argument>
         </arguments>

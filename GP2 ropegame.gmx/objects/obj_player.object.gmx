@@ -136,8 +136,17 @@ phy_active = 1;
     //with(obj_master) 
     //phy_speed_x = 0;
     //phy_speed_y = 0;
-    s = 5; //splatters
-    if !audio_is_playing(snd_death) audio_play_sound(snd_death,1,0);
+    if !audio_is_playing(snd_death) &amp;&amp; s != 5 
+    {
+        audio_play_sound(snd_death,1,0);
+        s = 5; //splatters
+        if global.alert = 1 //if the escape is ooonn, reset it
+        {
+            obj_master.escapetime = 240;
+            global.alert = 0;
+        }
+    }
+    if instance_exists(rope) with (rope) instance_destroy(); //destroy rope
 }
 else
 {
@@ -155,7 +164,11 @@ inst = instance_place(xx,yy,obj_text); //checks collision with text trigger
 iinst = instance_place(xx,yy,obj_save);
 if inst != noone &amp;&amp; (inst.mode &gt; 1 || (inst.mode &lt; 2 &amp;&amp; //mode &gt;1 instatriggers
     keyboard_check_pressed(key_A))&amp;&amp; inst.start_write=0) //&lt;2 keytriggers
+{
     inst.active = 1; //text object gets TrIgGeReDd with facts and logic!!1!
+    if !audio_is_playing(snd_comp1) &amp;&amp; inst.sprite_index = spr_computer 
+        audio_play_sound(snd_comp1,1,0); //bleep
+}
 else if iinst != noone &amp;&amp; keyboard_check_pressed(key_A) &amp;&amp; iinst.active = 0
     iinst.active = 1;
 else if global.action = 1 //if game is not paused/texting, calls controls script
@@ -346,13 +359,16 @@ if damage &gt;= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if damage = 0
+            <string>scr_damage(0.5,1,0);
+if other.direction &lt; 90 || other.direction &gt; 270
+        physics_apply_local_impulse(0,0,jumpspeed,-jumpspeed);
+    else physics_apply_local_impulse(0,0,-jumpspeed,-jumpspeed);
+/*
+if damage = 0
 {
     global.helth -= 0.5;
     damage = 1;
-    if other.direction &lt; 90 || other.direction &gt; 270
-        physics_apply_local_impulse(0,0,jumpspeed,-jumpspeed);
-    else physics_apply_local_impulse(0,0,-jumpspeed,-jumpspeed);
+    
 }
 </string>
           </argument>
@@ -400,7 +416,8 @@ global.helth -= 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if damage = 0
+            <string>scr_damage(0.5,2,1);
+/*if damage = 0
 {
     damage = 2;
     global.helth -= 0.5;
@@ -434,9 +451,7 @@ global.helth -= 1;
             <kind>1</kind>
             <string>if other.status = 2
 {
-    if damage = 0
-        global.helth -= 1;
-    damage = 1;
+    scr_damage(1,1,0);
 }
 </string>
           </argument>
@@ -462,9 +477,7 @@ global.helth -= 1;
             <kind>1</kind>
             <string>if other.status = 2
 {
-    if damage = 0
-        global.helth -= 1;
-    damage = 1;
+    scr_damage(1,1,0);
 }
 </string>
           </argument>
@@ -511,7 +524,11 @@ global.helth -= 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if s = 5 load();
+            <string>if s = 5
+{
+    with (obj_master) alarm[1] = 30;
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>

@@ -28,12 +28,15 @@
             <string>global.action = 0;
 global.saves = 0;
 global.alert = 0; //when final run is oonnn!!
+escapetime = 240; //time to escape (in seconds), duh (120,180,240,300...)
+tmr = 0;
 viewfollow = noone;
 subroom = noone;
 transitiontimer = 0;
 subroomprev = noone;
 pause = 0;
-music = 0;
+global.music = 0;
+purejenkki = 0;
 
 game = 0;
 menuu = 0;
@@ -127,6 +130,29 @@ message_length = string_length(message[message_current]); //get the number of ch
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>load();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -147,6 +173,11 @@ message_length = string_length(message[message_current]); //get the number of ch
             <string>global.action = 1;
 if !instance_exists(obj_player)
 instance_create(global.player_x,global.player_y,obj_player);
+if purejenkki = 0
+{
+    load(); //purkkaa pukkaa...
+}
+else purejenkki = 0;
 </string>
           </argument>
         </arguments>
@@ -237,8 +268,28 @@ if message_current != 0 || instance_exists(obj_alternate_text) //2 versions if t
 else
 {
     global.action = 1;
+    timer();
+    if global.alert = 1
+    {
+        tmr += 1;
+        if tmr &gt;= room_speed
+        {
+            tmr = 0;
+            escapetime -= 1;
+        }
+        if escapetime &lt;= 0 
+        {
+            global.helth = 0;
+            if global.helth &gt; 0
+            {
+                audio_play_sound(snd_expl1,1,0);
+                audio_play_sound(snd_expl2,1,0);
+            }
+        }
+    }
 }
-if keyboard_check_pressed(key_start)
+if keyboard_check_pressed(key_start) &amp;&amp; !instance_exists(obj_alternate_text)
+    &amp;&amp; instance_exists(obj_player)
 {
     if pause = 1
         pause = 0;
@@ -434,20 +485,22 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if room = room2 &amp;&amp; music = 0
+            <string>///Music
+if room = room2 &amp;&amp; global.music = 0
 {
     audio_stop_all();
     if !audio_is_playing(snd_lvl1) &amp;&amp; global.alert = 0 audio_play_sound(snd_lvl1,1,1);
-    music = 1
+    global.music = 1
 }
-else if room = room3 &amp;&amp; music = 0
+else if room = room3 &amp;&amp; global.music = 0
 {
     audio_stop_all();
     if global.player_x &lt; 8320 &amp;&amp; global.alert = 0
     {
         if !audio_is_playing(snd_lvl2) audio_play_sound(snd_lvl2,1,1);
-        music = 1
+        global.music = 1
     }
+    else global.music = 1;
 }
 </string>
           </argument>
@@ -478,6 +531,7 @@ subroomprev = noone;
 if room != menu 
 {
     alarm[0] = 5; //slight delay to load file
+    purejenkki = 1;
     if game = 1
     {
     if !file_exists(global.fname) //create ini if it doesn't exists
@@ -495,6 +549,7 @@ if room != menu
     }
     else if game = 2 load();
     game = 0;
+    global.music = 0;
 }
 </string>
           </argument>
@@ -577,8 +632,19 @@ if instance_exists(obj_player) draw_sprite(spr_koskicon,ceil(global.helth-1),64,
 //draw_text(x,y+16,ini_read_real("GAME","viewx",0));
 //ini_close();
 if mouse_y &lt; view_hview[1] draw_sprite_ext(spr_aim,0,mouse_x,mouse_y,1,1,0,c_white,1);
+    if pause = 1
+    {
+    hrs = string_repeat("0", 2-string_length(string(global.hour)))+string(global.hour);
+    mns = string_repeat("0", 2-string_length(string(global.mins)))+string(global.mins);
+    scs = string_repeat("0", 2-string_length(string(global.sec)))+string(global.sec);
+    draw_text(view_xview[1]+view_wview[1]-128,view_yview[1]+32,
+        "Time: " + hrs + ":" + mns + ":" + scs);
+    }
+    if global.alert = 1
+    draw_text(view_xview[1]+view_wview[1]-140,view_yview[1],
+        "Time to escape: " + string(escapetime));
 }
-else if mouse_y &gt;= 0 draw_sprite_ext(spr_aim,0,mouse_x,mouse_y,1,1,0,c_white,1);
+    else if mouse_y &gt;= 0 draw_sprite_ext(spr_aim,0,mouse_x,mouse_y,1,1,0,c_white,1);
 background_x[0] = (view_xview[0]);
 background_y[0] = (view_yview[0]);
 }

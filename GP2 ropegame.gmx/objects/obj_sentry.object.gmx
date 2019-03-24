@@ -63,7 +63,7 @@ with(b)
     phy_bullet = 1;
     physics_apply_local_impulse(0,0,1,0);
 }
-//if !audio_is_playing(snd_death) audio_play_sound(snd_death,1,0);
+if !audio_is_playing(snd_ratata) audio_play_sound(snd_ratata,1,0);
 shoot = 0;
 </string>
           </argument>
@@ -186,9 +186,9 @@ draw_sprite_ext(spr_sentry,image_index,x,y+16,image_xscale,xscale,direction,c_wh
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>8,16</point>
-    <point>24,16</point>
-    <point>24,30</point>
-    <point>8,30</point>
+    <point>8,8</point>
+    <point>20,8</point>
+    <point>20,20</point>
+    <point>8,20</point>
   </PhysicsShapePoints>
 </object>

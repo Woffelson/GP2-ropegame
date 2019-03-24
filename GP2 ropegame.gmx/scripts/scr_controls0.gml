@@ -31,7 +31,7 @@ key_start = vk_enter;
 key_select = vk_rcontrol;
 break;
 }
-case 2:
+/*case 2:
 {
 pad_lh = gp_axislh;
 pad_lv = gp_axislv;
@@ -44,5 +44,5 @@ key_Y = gp_face4;
 key_start = gp_start
 key_select = gp_select;
 break;
-}
+}*/
 }

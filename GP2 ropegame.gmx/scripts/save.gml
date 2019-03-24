@@ -14,6 +14,11 @@ ini_write_real("GAME","helth",global.helth);
 ini_write_real("GAME","events",global.events);
 ini_write_real("GAME","ship",global.ship);
 
+ini_write_real("GAME","time",global.time);
+ini_write_real("GAME","sec",global.sec);
+ini_write_real("GAME","mins",global.mins);
+ini_write_real("GAME","hour",global.hour);
+
 var i;
 for (i=0;i<global.unlockables;i++)//loop initialized unlock variables (handy if you're lazyass writer like me)
 ini_write_real("GAME","unlock"+string(i),global.unlock[i]);

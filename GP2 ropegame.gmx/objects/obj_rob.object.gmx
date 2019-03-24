@@ -87,6 +87,7 @@ if alrm &lt; rnd //when timer runs...
             phy_rotation,obj_door)
             xscale *= -1;
         image_speed = 0.1*anger;
+        if !audio_is_playing(snd_rob2) &amp;&amp; inside_view(0) audio_play_sound(snd_rob2,1,0);
         break;
     }
     case 2:
@@ -96,6 +97,7 @@ if alrm &lt; rnd //when timer runs...
         if phy_speed_x = 0 physics_apply_local_impulse(0,0,0.2*xscale,0);
         //alrm = 0;
         image_speed = 0.5;
+        if !audio_is_playing(snd_rob1) audio_play_sound(snd_rob1,1,0);
         break;
     }
     }
@@ -127,6 +129,7 @@ else if helth &lt;= 0
     image_speed = 0.25;
     phy_speed_x = 0;
     phy_speed_y = 0;
+    if !audio_is_playing(snd_expl2) audio_play_sound(snd_expl2,1,0);
 }
 else image_speed = 0;
 </string>
