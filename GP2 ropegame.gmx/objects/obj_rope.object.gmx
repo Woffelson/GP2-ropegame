@@ -54,7 +54,7 @@ wid = room_speed;
             <string>if phy_speed != 0 &amp;&amp; global.action = true &amp;&amp; grabbed = noone //checks pause etc
     phy_active = true;
 else phy_active = false;
-if grabbed != noone
+if instance_exists(grabbed)//grabbed != noone
 {
     grabbed.g = host.id;
     grabbed.r = id;
@@ -222,7 +222,7 @@ grab = true;
           <argument>
             <kind>1</kind>
             <string>draw_self();
-if host != noone
+if instance_exists(host) //!= noone
 {
 //draw_line_width_colour(x,y,host.x,host.y,2,c_teal,c_teal);
 with(host)

@@ -26,10 +26,13 @@
           <argument>
             <kind>1</kind>
             <string>///Obj setup
+start_x = x;
 alpha = 0;
 print = "";
 time = 0;
 s = 0;
+sr[1] = spr_gutenberg;
+sr[2] = spr_miller;
 depth = obj_master.depth-1;//depth - instance_number(obj_text); //wtf?
 
 t[0] = "Game saved. Full health.";
@@ -93,8 +96,8 @@ t[n+40] = "Many deadly traps still active... Abandoned for 600 years my ass.";
 
 //scene4
 t[n+41] = "Koski: Now let's load this, collect the data, and get the hell out of here! Soon this all will be over and my daughter will be fine.";
-t[n+42] = "Memory slide injected.";
-t[n+43] = "Self-destruct code initiated. Please evacuate immediately. Time to explosion (x) minutes.";
+t[n+42] = "Memory slide injected. Running procedure Hazard \#32.";
+t[n+43] = "Self-destruct code initiated. Please evacuate immediately. Time to explosion 4 minutes.";
 t[n+44] = "Koski: What the hell, no! No, no, no! Gotta call the boss.";
 t[n+45] = "Koski: Oioioi hey! What the fuck does this self-destruct code means?";
 t[n+46] = "Dr. Gutenberg: Perfect! You've completed the mission.";
@@ -106,7 +109,7 @@ t[n+51] = "Koski: I was just errand boy for your dirty work... My daughter...";
 t[n+52] = "Dr. Gutenberg: Now now, you did great work. Now just sit back and die in peace. You'll daughter will follow you soon to the afterlife.";
 t[n+53] = "Koski: I... I'll fucking murder you!";
 t[n+54] = "Dr. Gutenberg: It's pitiful to watch a dying man trying to hang on to life. You'll do nothing but die. Auf Wiedersehen!";
-t[n+55] = "Koski: You fucker!";
+t[n+55] = "Koski: You fucker! Ah, back to ship. I hope it works...";
 </string>
           </argument>
         </arguments>
@@ -130,7 +133,6 @@ t[n+55] = "Koski: You fucker!";
           <argument>
             <kind>1</kind>
             <string>///Add letters over time
-
 if(time &lt; text_length){
     time += spd + keyboard_check(obj_master.key_A);
     print = string_copy(t[tcount],0,time);
@@ -150,7 +152,16 @@ else
             time = 0;
         }
         if tcount = 47 audio_play_sound(snd_comp1,1,0);
+        if tcount = 14 save(); //skips intro dialogue after loading the game beginning
     }
+}
+
+nam = string_copy(t[tcount],1,3); //checks the character in dialogue
+switch (nam)
+{
+    case "Dr.": s = 1; break; //Gutenberg speaking
+    case "Mil": s = 2; break; //Miller speaking
+    default: s = 0;
 }
 </string>
           </argument>
@@ -201,9 +212,14 @@ draw_text_ext(
     font_size + (font_size/2),
     maxlength
 );
+x = start_x + 64*sign(s); //if s = 0, no dialogue character offset
 
 draw_set_alpha(1);
-if s != 0 draw_sprite(s,0,640-64,0);
+if s != 0
+{
+    draw_rectangle_colour(640-64,0,640,64,c_black,c_black,c_black,c_black,0);
+    draw_sprite(sr[s],0,640-64,0);
+}
 }
 </string>
           </argument>

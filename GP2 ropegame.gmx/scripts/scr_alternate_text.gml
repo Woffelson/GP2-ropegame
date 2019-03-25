@@ -7,7 +7,7 @@ txt = instance_create(argument2, argument3, obj_alternate_text);
 
 with (txt){
     padding = 4;
-    maxlength = 384;//view_wview[0];
+    maxlength = 376; //(384-8) view_wview[0];
     text = t[argument0]; //text = argument0;
     tcount = argument0; //
     textend = argument4; //last line in dialogues for example
@@ -20,7 +20,7 @@ with (txt){
     draw_set_font(font);
     
     //max text width and height
-    text_width = string_width_ext(text,font_size + (font_size/2), maxlength);
+    text_width = string_width_ext(text,font_size + (font_size/2), maxlength+8);
     text_height = string_height_ext(text,font_size + (font_size/2), maxlength);
     
     boxwidth = text_width + (padding*2);

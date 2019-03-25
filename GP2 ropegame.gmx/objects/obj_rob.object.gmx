@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>phy_fixed_rotation = true;
-image_speed = 0.1;
+image_speed = 0.2;
 xscale = 1;
 alrm = 0;
 rnd = 10;
@@ -76,7 +76,7 @@ if alrm &lt; rnd //when timer runs...
     alrm += 0.1*anger;
     switch(status)
     {
-    case 0: image_speed = 0.1*anger; break;
+    case 0: image_speed = 0.2*anger; break;
     case 1: //if walking
     {
         if phy_speed &lt; spede
@@ -86,7 +86,7 @@ if alrm &lt; rnd //when timer runs...
             || physics_test_overlap(phy_position_x+(xscale*16),phy_position_y-4,
             phy_rotation,obj_door)
             xscale *= -1;
-        image_speed = 0.1*anger;
+        image_speed = 0.2*anger;
         if !audio_is_playing(snd_rob2) &amp;&amp; inside_view(0) audio_play_sound(snd_rob2,1,0);
         break;
     }

@@ -209,6 +209,10 @@ else if abs(phy_speed_y) &gt; 0.2 &amp;&amp; (!physics_test_overlap(xx+8,yy+16,p
 else if horizontal != 0 s = 1+gump; //walking or running sprite
 else s = 0; //idle sprite
 
+mine = instance_nearest(x,y,obj_mine) //more destructive mine code \m/
+if instance_exists(mine) 
+if distance_to_point(mine.x,mine.y) &lt; 32 &amp;&amp; mine.sprite_index = spr_expl global.helth -=1;
+
 if damage &gt;= 1 
 {
     if alarm[1] = -1 alarm[1] = room_speed/2; //delay until can take dmg again
@@ -290,7 +294,8 @@ if damage &gt;= 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if other.sprite_index = spr_expl global.helth -=1;
+            <string>///this whole event could be deleted...
+//if other.sprite_index = spr_expl global.helth -=1;
 </string>
           </argument>
         </arguments>
@@ -360,9 +365,12 @@ if damage &gt;= 1
           <argument>
             <kind>1</kind>
             <string>scr_damage(0.5,1,0);
+if damage = 0
+{
 if other.direction &lt; 90 || other.direction &gt; 270
         physics_apply_local_impulse(0,0,jumpspeed,-jumpspeed);
     else physics_apply_local_impulse(0,0,-jumpspeed,-jumpspeed);
+}
 /*
 if damage = 0
 {

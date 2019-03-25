@@ -66,9 +66,9 @@ if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.ship = 1 &amp;&amp; dis
     if phy_position_y &gt; -128 &amp;&amp; obj_master.pause = 1//ship fliieess awayyy
     {
         physics_apply_local_force(0,0,-1,-1);
-        //escape += 1;
-        phy_position_y -= 2*escape;
-        phy_position_x -= 2*escape;
+        escape += 0.1;
+        phy_position_y -= 0.05*escape;
+        phy_position_x -= 0.05*escape;
     }
 }
 else
@@ -93,6 +93,7 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         {
             global.ship = 1;
             audio_play_sound(snd_remontsreiska,1,0);
+            scr_alternate_text(28, 0.5, 192, 0,0);
         }
     }
 }

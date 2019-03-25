@@ -2,6 +2,7 @@ ini_open(global.fname); //"read" the variables from the save file
 
 global.rom = ini_read_real("GAME","room",0);
 if room != global.rom room_goto(global.rom);
+else room_restart();
 instance_activate_object(obj_subroom);
 //global.distance=ini_read_real("GAME","distance",0); //load AND assign the distance
 //global.saves=ini_read_real("GAME","saves",0); //load AND assign the saves
@@ -40,5 +41,5 @@ else
     with (obj_master) alarm[0] = 5; //creates the player there
 }
 
-global.music = 0;
+//global.music = 0;
 ini_close(); //close the file
