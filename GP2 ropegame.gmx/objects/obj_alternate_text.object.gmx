@@ -31,6 +31,7 @@ alpha = 0;
 print = "";
 time = 0;
 s = 0;
+index = 0; //for splitting big texts (hopefully working)!
 sr[1] = spr_gutenberg;
 sr[2] = spr_miller;
 depth = obj_master.depth-1;//depth - instance_number(obj_text); //wtf?
@@ -52,7 +53,7 @@ t[n+5] = "Dr. Gutenberg: I presume that I don't need to underline how serious th
 t[n+6] = "Koski: I have my daughter’s life on the line so I know exactly how serious this is.";
 t[n+7] = "Dr. Gutenberg: Just contact us when you get inside the facility.";
 t[n+8] = "Koski: Sir yes sir!";
-t[n+9] = "Koski: 'InZiDe Ze FaZiLiTy.' What a f***ing mess. I need to find the ship first to collect my guns. Aaand off to save humanity once again.";
+t[n+9] = "Koski: InZiDe Ze FaZiLiTy. What a fucking mess. I need to find the ship first to collect my guns. Aaand off to save humanity once again.";
 
 //scene2
 t[n+10] = "Koski: I found the ship. It looks to be quite alright, but it needs a little fixing to get it fly.";
@@ -110,6 +111,9 @@ t[n+52] = "Dr. Gutenberg: Now now, you did great work. Now just sit back and die
 t[n+53] = "Koski: I... I'll fucking murder you!";
 t[n+54] = "Dr. Gutenberg: It's pitiful to watch a dying man trying to hang on to life. You'll do nothing but die. Auf Wiedersehen!";
 t[n+55] = "Koski: You fucker! Ah, back to ship. I hope it works...";
+
+t[n+56] = "Koski: Oh dang, I totally forgot to fix the ship... Gotta search for the tools ASAP! I wonder if our fallen mechanic had them...";
+t[n+57] = "Thx 4 playin'!!1!";
 </string>
           </argument>
         </arguments>
@@ -134,25 +138,37 @@ t[n+55] = "Koski: You fucker! Ah, back to ship. I hope it works...";
             <kind>1</kind>
             <string>///Add letters over time
 if(time &lt; text_length){
+if string_height_ext(print,-1,128) &lt; 174{//
     time += spd + keyboard_check(obj_master.key_A);
-    print = string_copy(t[tcount],0,time);
+    print = string_copy(t[tcount],index,time); //index = 0...
     
+    } else if keyboard_check_pressed(obj_master.key_A)//
+    {text_length -= time; index += time; time = 0; print = "";}//
 }
 else
 {
-    if keyboard_check_pressed(obj_master.key_A)
+    index = 0;
+    if (keyboard_check_pressed(obj_master.key_A)) &amp;&amp; tcount &gt;= 0//
     {
         if tcount &gt;= textend
+        {
             instance_destroy();
+            if audio_is_playing(snd_k6) audio_stop_sound(snd_k6);
+        }
         else //instance_destroy();
         {
             tcount += 1; //keeps track on the current array written
             text_length = string_length(t[tcount]);
             print = "";
             time = 0;
-        }
+        //}
+        scr_dialogue();
+        if !audio_is_playing(snd_zzz) &amp;&amp; ((tcount != 25 &amp;&amp; tcount != 26)
+            &amp;&amp; (tcount &lt; 46 || tcount &gt; 50))
+            audio_play_sound(snd_zzz,1,0);//*/
         if tcount = 47 audio_play_sound(snd_comp1,1,0);
         if tcount = 14 save(); //skips intro dialogue after loading the game beginning
+        }
     }
 }
 

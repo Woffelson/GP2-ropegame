@@ -65,8 +65,9 @@ if active = 1 //&amp;&amp; instance_exists(obj_master)
         if start_write = 0 &amp;&amp; startti != 0
         {//start texting if obj_senpai still shy OwO
             //scr_alternate_text(startti, 0.5, 256, 0);
-            if endi = 0 scr_alternate_text(startti,1,192,0,startti); //FUTURECODE
-            else scr_alternate_text(startti, 1, 128, 0, endi);//do argument4 first
+            if endi = 0 scr_alternate_text(startti,1,192,0,startti);
+            else scr_alternate_text(startti, 1, 128, 0, endi);
+            if startti &lt; 6 with (obj_alternate_text) scr_dialogue();
             start_write = 1;
         }
         else

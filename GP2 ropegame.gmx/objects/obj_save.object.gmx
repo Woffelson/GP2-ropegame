@@ -32,6 +32,7 @@ sc[1] = c_lime;
 s = 0;
 active = 0;
 escape = 1;
+hmm = 0;
 </string>
           </argument>
         </arguments>
@@ -57,14 +58,33 @@ escape = 1;
             <string>if global.alert = 1
 {
     saved = 1;
-if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; global.ship = 1 &amp;&amp; distance_to_object(obj_player) &lt; 1
-    { //FINISH THE EFFIN' GAME!
-        obj_master.pause = 1;
-        if instance_exists(obj_player)
-        with (obj_player) instance_destroy();
-    }
-    if phy_position_y &gt; -128 &amp;&amp; obj_master.pause = 1//ship fliieess awayyy
+    if room = room2 &amp;&amp; x &lt; 4000 &amp;&amp; distance_to_object(obj_player) &lt; 1
     {
+        if global.ship = 1
+        { //FINISH THE EFFIN' GAME!
+            obj_master.pause = 1;
+            if instance_exists(obj_player)
+                with (obj_player) instance_destroy();
+            scr_alternate_text(62,0.5,192,0,62);
+            global.ending = 1;
+        }
+        else if hmm = 0
+        {
+            scr_alternate_text(61,0.5,128,0,61);
+            hmm = 1;
+        }
+        else if global.unlock[2] = 1 //jälkiviisas ship repair
+        {
+            if global.ship = 0
+            {
+                global.ship = 1;
+                audio_play_sound(snd_remontsreiska,1,0);
+                //scr_alternate_text(28, 0.5, 192, 0,28);
+            }
+        }
+    }
+    if phy_position_y &gt; -128 &amp;&amp; obj_master.pause = 1 &amp;&amp; !instance_exists(obj_player)
+    { //ship fliieess awayyy
         physics_apply_local_force(0,0,-1,-1);
         escape += 0.1;
         phy_position_y -= 0.05*escape;
@@ -93,7 +113,7 @@ if saved = 0 &amp;&amp; distance_to_object(obj_player) &lt; 1
         {
             global.ship = 1;
             audio_play_sound(snd_remontsreiska,1,0);
-            scr_alternate_text(28, 0.5, 192, 0,0);
+            scr_alternate_text(28, 0.5, 192, 0,28);
         }
     }
 }

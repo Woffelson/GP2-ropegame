@@ -168,7 +168,7 @@
     <instance objName="obj_bear" x="2912" y="224" name="inst_EE5556EB" locked="0" code="idle = spr_wolfi;&#xA;walk = spr_wolfw;&#xA;attack = spr_wolfa;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_spike" x="1824" y="432" name="inst_D656A632" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
     <instance objName="obj_spike" x="1888" y="496" name="inst_68AE454F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="90"/>
-    <instance objName="obj_spike" x="2144" y="400" name="inst_7FD52C4E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
+    <instance objName="obj_spike" x="2144" y="400" name="inst_7FD52C4E" locked="0" code="if global.easy = 1 instance_destroy();&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
     <instance objName="obj_spike" x="2208" y="512" name="inst_E9D0064B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="90"/>
     <instance objName="obj_spike" x="2032" y="560" name="inst_6E61C778" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="315"/>
     <instance objName="obj_spike" x="2064" y="592" name="inst_62D65C8E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="315"/>

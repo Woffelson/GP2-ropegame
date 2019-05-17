@@ -25,6 +25,23 @@
     <sound>sound\snd_rob2</sound>
     <sound>sound\snd_expl2</sound>
     <sound>sound\snd_remontsreiska</sound>
+    <sound>sound\snd_menu</sound>
+    <sound>sound\snd_ambience</sound>
+    <sound>sound\snd_esc</sound>
+    <sound>sound\snd_endi</sound>
+    <sounds name="Dialogue">
+      <sound>sound\snd_zzz</sound>
+      <sound>sound\snd_dr1</sound>
+      <sound>sound\snd_dr2</sound>
+      <sound>sound\snd_dr3</sound>
+      <sound>sound\snd_dr4</sound>
+      <sound>sound\snd_k1</sound>
+      <sound>sound\snd_k2</sound>
+      <sound>sound\snd_k3</sound>
+      <sound>sound\snd_k4</sound>
+      <sound>sound\snd_k5</sound>
+      <sound>sound\snd_k6</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprites name="player">
@@ -104,6 +121,9 @@
     <background>background\background4</background>
     <background>background\tiles</background>
     <background>background\background3</background>
+    <background>background\background5</background>
+    <background>background\background7</background>
+    <background>background\background6</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -121,9 +141,12 @@
     <script>scripts\scr_damage.gml</script>
     <script>scripts\inside_view.gml</script>
     <script>scripts\timer.gml</script>
+    <script>scripts\scr_dialogue.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
+    <font>fonts\font1</font>
+    <font>fonts\font2</font>
   </fonts>
   <objects name="objects">
     <objects name="system">

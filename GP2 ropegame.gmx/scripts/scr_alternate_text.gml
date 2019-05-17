@@ -1,4 +1,4 @@
-///scr_text("Text",speed,x,y);
+///scr_alternate_text("Text",speed,x,y,end_text);
 
 //creates an object and carries the text to an object to draw to
 
